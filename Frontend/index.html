@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/iconfonts/ionicons/dist/css/ionicons.css">
+    <link rel="stylesheet" href="assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.addons.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="assets/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/demo_1/style.css">
+    <!-- End Layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+            <div class="row page-title-header">
+              <div class="col-12">
+                <div class="page-header">
+                  <h4 class="page-title">Dashboard</h4>
+                  <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
+                    <ul class="quick-links">
+                      <li><a href="#">ICE Market data</a></li>
+                      <li><a href="#">Own analysis</a></li>
+                      <li><a href="#">Historic market data</a></li>
+                    </ul>
+                    <ul class="quick-links ml-auto">
+                      <li><a href="#">Settings</a></li>
+                      <li><a href="#">Analytics</a></li>
+                      <li><a href="#">Watchlist</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="page-header-toolbar">
+                  <div class="btn-group toolbar-item" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-secondary"><i class="mdi mdi-chevron-left"></i></button>
+                    <button type="button" class="btn btn-secondary">03/02/2019 - 20/08/2019</button>
+                    <button type="button" class="btn btn-secondary"><i class="mdi mdi-chevron-right"></i></button>
+                  </div>
+                  <div class="filter-wrapper">
+                    <div class="dropdown toolbar-item">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownsorting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Day</button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownsorting">
+                        <a class="dropdown-item" href="#">Last Day</a>
+                        <a class="dropdown-item" href="#">Last Month</a>
+                        <a class="dropdown-item" href="#">Last Year</a>
+                      </div>
+                    </div>
+                    <a href="#" class="advanced-link toolbar-item">Advanced Options</a>
+                  </div>
+                  <div class="sort-wrapper">
+                    <button type="button" class="btn btn-primary toolbar-item">New</button>
+                    <div class="dropdown ml-lg-auto ml-3 toolbar-item">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownexport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export</button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownexport">
+                        <a class="dropdown-item" href="#">Export as PDF</a>
+                        <a class="dropdown-item" href="#">Export as DOCX</a>
+                        <a class="dropdown-item" href="#">Export as CDR</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Page Title Header Ends-->
+
+            <div class="row">
+              <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55262.74502681689!2d-51.194025461446884!3d-30.039108029506703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95199cd2566acb1d%3A0x603111a89f87e91f!2sPorto%20Alegre%2C%20RS!5e0!3m2!1spt-BR!2sbr!4v1602013977306!5m2!1spt-BR!2sbr" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body d-flex flex-column">
+                    <div class="wrapper">
+                      <h4 class="card-title mb-0">Net Profit Margin</h4>
+                      <p>Started collecting data from February 2019</p>
+                      <div class="mb-4" id="net-profit-legend"></div>
+                    </div>
+                    <canvas class="my-auto mx-auto" height="250" id="net-profit"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          <footer class="footer">
+            <div class="container-fluid clearfix">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2019 <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i>
+              </span>
+            </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="assets/vendors/js/vendor.bundle.addons.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="assets/js/shared/off-canvas.js"></script>
+    <script src="assets/js/shared/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="assets/js/demo_1/dashboard.js"></script>
+    <!-- End custom js for this page-->
+  </body>
+</html>
