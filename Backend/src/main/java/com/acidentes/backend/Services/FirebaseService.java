@@ -15,54 +15,55 @@ import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 
-import models.Carro;
+import models.Radar;
 
 @Service
 public class FirebaseService {
 
-	public String saveCarDetails(Carro carro) throws InterruptedException, ExecutionException {
+//	public String saveCarDetails(Radar carro) throws InterruptedException, ExecutionException {
+//
+//		Firestore dbFirestore = FirestoreClient.getFirestore();
+//		ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("carros").document(carro.getLatitude())
+//				.set(carro);
+//
+//		return collectionsApiFuture.get().getUpdateTime().toString();
+//	}
 
-		Firestore dbFirestore = FirestoreClient.getFirestore();
-		ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("carros").document(carro.getLatitude())
-				.set(carro);
+//	public Radar getCarDetails2(String latitude) throws InterruptedException, ExecutionException {
+//
+//		Firestore dbFirestore = FirestoreClient.getFirestore();
+//		DocumentReference documentReference = dbFirestore.collection("carros").document(latitude);
+//		
+//		ApiFuture<DocumentSnapshot> future = documentReference.get();
+//		
+//		DocumentSnapshot document = future.get();
+//		
+//		Radar carro = null;
+//		
+//		if (document.exists()) {
+//			carro = document.toObject(Radar.class);
+//			return carro;
+//		} else {
+//			return null;
+//		}
+//
+//	}
 
-		return collectionsApiFuture.get().getUpdateTime().toString();
-	}
-
-	public Carro getCarDetails2(String latitude) throws InterruptedException, ExecutionException {
-
-		Firestore dbFirestore = FirestoreClient.getFirestore();
-		DocumentReference documentReference = dbFirestore.collection("carros").document(latitude);
-		
-		ApiFuture<DocumentSnapshot> future = documentReference.get();
-		
-		DocumentSnapshot document = future.get();
-		
-		Carro carro = null;
-		
-		if (document.exists()) {
-			carro = document.toObject(Carro.class);
-			return carro;
-		} else {
-			return null;
-		}
-
-	}
-
-	public Carro getCarDetails(String latitude) throws InterruptedException, ExecutionException {
+	// Fetch radar Details
+	public Radar getRadarDetails(String itemId) throws InterruptedException, ExecutionException {
 
 
 		// asynchronously retrieve multiple documents
 		Firestore db = FirestoreClient.getFirestore();
 
-		ApiFuture<QuerySnapshot> future = db.collection("carros").whereEqualTo("latitude", latitude).get();
+		ApiFuture<QuerySnapshot> future = db.collection("radares").whereEqualTo("itemID", itemId).get();
 		// future.get() blocks on response
 		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 		for (DocumentSnapshot document : documents) {
-			Carro carro = null;
+			Radar carro = null;
 			
 			if (document.exists()) {
-				carro = document.toObject(Carro.class);
+				carro = document.toObject(Radar.class);
 				return carro;
 			} 
 		}
