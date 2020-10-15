@@ -6,14 +6,14 @@ public class Radar {
 	private String Logradouro;
 	private int Numero;
 	private int Limite;
-	private String Latitude;
-	private String Longitude;
+	private Double Latitude;
+	private Double Longitude;
 	
 	public Radar() {
 		super();
 	}
 	
-	public Radar(String itemID, String logradouro, int numero, int limite, String latitude, String longitude) {
+	public Radar(String itemID, String logradouro, int numero, int limite, Double latitude, Double longitude) {
 		super();
 		this.itemID = itemID;
 		Logradouro = logradouro;
@@ -55,19 +55,19 @@ public class Radar {
 		Limite = limite;
 	}
 
-	public String getLatitude() {
+	public Double getLatitude() {
 		return Latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(Double latitude) {
 		Latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public Double getLongitude() {
 		return Longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(Double longitude) {
 		Longitude = longitude;
 	}
 
