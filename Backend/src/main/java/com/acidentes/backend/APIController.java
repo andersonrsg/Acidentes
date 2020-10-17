@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.firebase.internal.FirebaseScheduledExecutor;
 import com.acidentes.backend.Services.*;
 
-import models.Radar;
+import models.*;
 
 @RestController
 public class APIController {
@@ -28,15 +28,28 @@ public class APIController {
 		return "{\n\tGG\n}";
 	}
 	
-//	@PostMapping("/createCar")
-//	public String createCar(@RequestBody Radar car) throws InterruptedException, ExecutionException {
-//		return firebaseService.saveCarDetails(car);
-//	}
+	@GetMapping("/getSpeedMonitor") 
+	public Lombada getSpeedMonitor() throws InterruptedException, ExecutionException {
+		
+		return firebaseService.getSpeedMonitorDetail("5");
+	}
+	
+	@GetMapping("/getWeather") 
+	public Clima getWeather() throws InterruptedException, ExecutionException {
+		
+		return firebaseService.getWeatherDetail("100");
+	}
 	
 	@GetMapping("/getRadar") 
-	public Radar getCar(@RequestHeader() String itemId) throws InterruptedException, ExecutionException {
+	public Radar getRadar() throws InterruptedException, ExecutionException {
 		
-		return firebaseService.getRadarDetails(itemId);
+		return firebaseService.getRadarDetails("5");
+	}
+	
+	@GetMapping("/getTransitBoard") 
+	public Placa getTransitBoard() throws InterruptedException, ExecutionException {
+		
+		return firebaseService.getTransitBoardDetails("5");
 	}
 	
 	

@@ -15,60 +15,108 @@ import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 
+import models.Clima;
+import models.Lombada;
+import models.Placa;
 import models.Radar;
 
 @Service
 public class FirebaseService {
 
-//	public String saveCarDetails(Radar carro) throws InterruptedException, ExecutionException {
-//
-//		Firestore dbFirestore = FirestoreClient.getFirestore();
-//		ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("carros").document(carro.getLatitude())
-//				.set(carro);
-//
-//		return collectionsApiFuture.get().getUpdateTime().toString();
-//	}
-
-//	public Radar getCarDetails2(String latitude) throws InterruptedException, ExecutionException {
-//
-//		Firestore dbFirestore = FirestoreClient.getFirestore();
-//		DocumentReference documentReference = dbFirestore.collection("carros").document(latitude);
-//		
-//		ApiFuture<DocumentSnapshot> future = documentReference.get();
-//		
-//		DocumentSnapshot document = future.get();
-//		
-//		Radar carro = null;
-//		
-//		if (document.exists()) {
-//			carro = document.toObject(Radar.class);
-//			return carro;
-//		} else {
-//			return null;
-//		}
-//
-//	}
 
 	// Fetch radar Details
 	public Radar getRadarDetails(String itemId) throws InterruptedException, ExecutionException {
 
-
-		// asynchronously retrieve multiple documents
 		Firestore db = FirestoreClient.getFirestore();
-
-		ApiFuture<QuerySnapshot> future = db.collection("radares").whereEqualTo("itemID", itemId).get();
-		// future.get() blocks on response
+		// Working Query
+		//ApiFuture<QuerySnapshot> future = db.collection("radares").whereEqualTo("itemID", itemId).limit(1).get();
+		
+		
+		ApiFuture<QuerySnapshot> future = db.collection("radares").orderBy("itemID").startAt(itemId).limit(1).get();
+		
+		
 		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+		
 		for (DocumentSnapshot document : documents) {
-			Radar carro = null;
+			
+			Radar radar = null;
 			
 			if (document.exists()) {
-				carro = document.toObject(Radar.class);
-				return carro;
+				radar = document.toObject(Radar.class);
+				return radar;
 			} 
 		}
 		return null;
 	}
-	
-	
+
+		public Placa getTransitBoardDetails(String itemId) throws InterruptedException, ExecutionException {
+
+			Firestore db = FirestoreClient.getFirestore();
+			// Working Query
+			//ApiFuture<QuerySnapshot> future = db.collection("radares").whereEqualTo("itemID", itemId).limit(1).get();
+			
+			
+			ApiFuture<QuerySnapshot> future = db.collection("placas").orderBy("itemID").startAt(itemId).limit(1).get();
+			
+			
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			
+			for (DocumentSnapshot document: documents) {
+				Placa transitBoard = null;
+				
+				if (document.exists()) {
+					transitBoard = document.toObject(Placa.class);
+					return transitBoard;
+				} 
+			}
+			return null;
+		}
+
+		public Lombada getSpeedMonitorDetail(String itemId) throws InterruptedException, ExecutionException {
+
+			Firestore db = FirestoreClient.getFirestore();
+			// Working Query
+			//ApiFuture<QuerySnapshot> future = db.collection("radares").whereEqualTo("itemID", itemId).limit(1).get();
+			
+			
+			ApiFuture<QuerySnapshot> future = db.collection("mapaRadares").orderBy("itemID").startAt(itemId).limit(1).get();
+			
+			
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			
+			for (DocumentSnapshot document: documents) {
+				Lombada lombada = null;
+				
+				if (document.exists()) {
+					lombada = document.toObject(Lombada.class);
+					return lombada;
+				} 
+			}
+			return null;
+		}
+
+
+		public Clima getWeatherDetail(String itemId) throws InterruptedException, ExecutionException {
+
+			Firestore db = FirestoreClient.getFirestore();
+			// Working Query
+			//ApiFuture<QuerySnapshot> future = db.collection("radares").whereEqualTo("itemID", itemId).limit(1).get();
+			
+			
+			ApiFuture<QuerySnapshot> future = db.collection("mapaRadares").orderBy("itemID").startAt(itemId).limit(1).get();
+			
+			
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			
+			for (DocumentSnapshot document: documents) {
+				Clima weather = null;
+				
+				if (document.exists()) {
+					weather = document.toObject(Clima.class);
+					return weather;
+				} 
+			}
+			return null;
+		}
+
 }
