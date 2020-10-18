@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -40,10 +41,10 @@ public class APIController {
 		return firebaseService.getWeatherDetail("100");
 	}
 	
-	@GetMapping("/getRadar") 
-	public Radar getRadar() throws InterruptedException, ExecutionException {
+	@GetMapping("/getRadar/{radarId}") 
+	public Radar getRadar(@PathVariable String radarId) throws InterruptedException, ExecutionException {
 		
-		return firebaseService.getRadarDetails("5");
+		return firebaseService.getRadarDetails(radarId);
 	}
 	
 	@GetMapping("/getTransitBoard") 
