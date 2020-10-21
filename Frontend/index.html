@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.addons.css">
     <script type="text/javascript" src="controller/frontController.js"></script>
+    <script type="text/javascript" src="controller/map.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqWR38L4RRN7k4UWAr2eeOh5ZGXH0bb08&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -88,8 +93,8 @@
             <div class="row">
               <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                  <div class="card-body">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55262.74502681689!2d-51.194025461446884!3d-30.039108029506703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95199cd2566acb1d%3A0x603111a89f87e91f!2sPorto%20Alegre%2C%20RS!5e0!3m2!1spt-BR!2sbr!4v1602013977306!5m2!1spt-BR!2sbr" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                  <div id="map" class="card-body">
+                    <!-- MAPA AQUI-->
                   </div>
                 </div>
               </div>
@@ -107,7 +112,7 @@
                     <!--<canvas class="my-auto mx-auto" height="250" id="net-profit"></canvas>-->
 
                     <p>.</p>
-                    <p>.</p>
+                    <button type="button" onclick="initMap()">getAll</button>
                     <p>.</p>
                     <p>.</p>
                     <p>.</p>
