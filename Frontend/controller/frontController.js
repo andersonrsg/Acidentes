@@ -1,38 +1,29 @@
 var defaultUrl = "http://localhost:8080/acidentes/";
 
-
-
-
 function getAll() {
     $.ajax({
         url: defaultUrl + "getAll",
         type: "GET",
-        dataType : "json",
         success: function (data) {
-            console.log("GET DATA API RESPONSE - ID::"+data.id);
-            console.log("GET DATA API RESPONSE - NAME::"+data.name);
+            document.getElementById("testRest").innerHTML = data;
         }, error: function () {
             console.log("x")
         }
     });
 }
 
-
-
-function findRadarByIdx() {
+function findRadarById() {
     $.ajax({
-        type : 'GET',
-        url : defaultUrl + "gerRadar/" + 1,
-        dataType : "json",
-        success : function (result) {
-            document.getElementById("testRest").innerHTML = result;
-        },
-        error : function (error) {
-            document.getElementById("testRest").innerHTML = "deu radar rui2m3";
+        type : "GET",
+        url : defaultUrl + "getRadar/1",
+        success : function (data) {
+            console.log(data)
+            document.getElementById("testRest").innerHTML = data;
+        }, error: function () {
+            console.log("x")
         }
     });
 }
-
 
 function mudaop(){
     document.getElementById("testRest").innerHTML = "Paragraph changed!";

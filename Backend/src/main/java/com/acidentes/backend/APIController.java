@@ -20,15 +20,17 @@ import com.acidentes.backend.Services.*;
 
 import models.*;
 
+
+
 @RestController
-@RequestMapping("/acidentes")
+@CrossOrigin
+@RequestMapping(path = "acidentes")
 public class APIController {
 
 	@Autowired
 	FirebaseService firebaseService;
 
-	@CrossOrigin
-	@RequestMapping("/getAll")
+	@GetMapping(path = "getAll")
 	public @ResponseBody String getAll() {
 		return "{\n\tGG\n}";
 	}
@@ -45,10 +47,8 @@ public class APIController {
 		return firebaseService.getWeatherDetail("100");
 	}
 	
-	@CrossOrigin(origins = "http://localhost:8080")
-	@RequestMapping(method = RequestMethod.GET, path = "/getRadar/{radarId}")
-//	@GetMapping("/getRadar/{radarId}")
-	public Radar getRadar(@PathVariable String radarId) throws InterruptedException, ExecutionException {
+	@GetMapping(path = "getRadar/{radarId}")
+	public @ResponseBody Radar getRadar(@PathVariable String radarId) throws InterruptedException, ExecutionException {
 		
 		return firebaseService.getRadarDetails(radarId);
 	}
