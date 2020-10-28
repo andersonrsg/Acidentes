@@ -19,6 +19,8 @@ import com.google.firebase.internal.FirebaseScheduledExecutor;
 import com.acidentes.backend.Services.*;
 
 import models.*;
+import utils.ApiUtils;
+import utils.ApiUtils.APIClass;
 
 
 
@@ -57,6 +59,12 @@ public class APIController {
 	public Placa getTransitBoard() throws InterruptedException, ExecutionException {
 		
 		return firebaseService.getTransitBoardDetails("5");
+	}
+	
+	@GetMapping("/getWeatherAccidentsGraph/{startDate}/{endDate}") 
+	public WeatherAccident getWeatherAccidents(@PathVariable String startDate, @PathVariable String endDate) throws InterruptedException, ExecutionException {
+
+		return firebaseService.getWeatherAccidentDetail(startDate, endDate);
 	}
 	
 	

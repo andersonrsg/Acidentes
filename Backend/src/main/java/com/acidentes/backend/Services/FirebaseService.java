@@ -1,5 +1,7 @@
 package com.acidentes.backend.Services;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -19,6 +21,9 @@ import models.Clima;
 import models.Lombada;
 import models.Placa;
 import models.Radar;
+import models.WeatherAccident;
+import utils.ApiUtils;
+import utils.ApiUtils.APIClass;
 
 @Service
 public class FirebaseService {
@@ -118,5 +123,58 @@ public class FirebaseService {
 			}
 			return null;
 		}
+		
+		public WeatherAccident getWeatherAccidentDetail(String startDate, String endDate) throws InterruptedException, ExecutionException {
+
+			
+			// Weather
+			String startDateWeatherFirebaseString = ApiUtils.dateToAPIString(APIClass.weather, startDate);
+			String endDateWeatherFirebaseString = ApiUtils.dateToAPIString(APIClass.weather, endDate);
+			
+			// Accidents
+			String startDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, startDate);
+			String endDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, endDate);
+			
+			
+			
+			Firestore db = FirestoreClient.getFirestore();
+			
+			// Weather
+//			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").whereGreaterThan("Data", startDateWeatherFirebaseString).whereLessThan("Data", endDateWeatherFirebaseString).limit(10).get();
+			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").limit(10).get();			
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			WeatherAccident weatherAccident = new WeatherAccident();
+			System.out.println("Documents: " + documents);
+			for (DocumentSnapshot document: documents) {
+				Clima weather = null;
+				System.out.println(document);	
+				if (document.exists()) {
+					weather = document.toObject(Clima.class);
+					weatherAccident.weathers.add(weather);
+				} 
+			}
+			
+			// Aciddents
+//			ApiFuture<QuerySnapshot> future = db.collection("radares").whereGreaterThan("data", ApiUtils.dateToAPIString(ApiUtils.APIClass.accident, startDate)).whereLessThan("data", ApiUtils.dateToAPIString(ApiUtils.APIClass.accident, endDate)).limit(10).get();			
+//			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+//			WeatherAccident weatherAccident = new WeatherAccident();
+//			
+//			for (DocumentSnapshot document: documents) {
+//				Clima weather = null;
+//				
+//				if (document.exists()) {
+//					weather = document.toObject(Clima.class);
+//					weatherAccident.weathers.add(weather);
+//				} 
+//			}
+			
+			
+			
+			return weatherAccident;
+		}
+		
+		
+		
+		
 
 }
