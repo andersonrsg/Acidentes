@@ -5,12 +5,24 @@ public class Clima {
 	private String itemID;
 	private String Data;
 	private String Hora;
-	private String PrecipitacaoTotal;
+	private long PrecipitacaoTotal;
 	private int UmidadeRelativaAr;
 	private int UmidadeRelativaMax;
 	private int UmidadeRelativaMin;
 	
-	public Clima(String itemID, String data, String hora, String precipitacaoTotal, int umidadeRelativaAr,
+//	public Clima(String itemID, String data, String hora, String precipitacaoTotal, int umidadeRelativaAr,
+//			int umidadeRelativaMax, int umidadeRelativaMin) {
+//		super();
+//		this.itemID = itemID;
+//		Data = data;
+//		Hora = hora;
+//		PrecipitacaoTotal = precipitacaoTotal;
+//		UmidadeRelativaAr = umidadeRelativaAr;
+//		UmidadeRelativaMax = umidadeRelativaMax;
+//		UmidadeRelativaMin = umidadeRelativaMin;
+//	}
+	
+	public Clima(String itemID, String data, String hora, long precipitacaoTotal, int umidadeRelativaAr,
 			int umidadeRelativaMax, int umidadeRelativaMin) {
 		super();
 		this.itemID = itemID;
@@ -51,13 +63,13 @@ public class Clima {
 		Hora = hora;
 	}
 
-	public String getPrecipitacaoTotal() {
-		return PrecipitacaoTotal;
-	}
-
-	public void setPrecipitacaoTotal(String precipitacaoTotal) {
-		PrecipitacaoTotal = precipitacaoTotal;
-	}
+//	public String getPrecipitacaoTotal() {
+//		return PrecipitacaoTotal;
+//	}
+//
+//	public void setPrecipitacaoTotal(String precipitacaoTotal) {
+//		PrecipitacaoTotal = precipitacaoTotal;
+//	}
 
 	public int getUmidadeRelativaAr() {
 		return UmidadeRelativaAr;
