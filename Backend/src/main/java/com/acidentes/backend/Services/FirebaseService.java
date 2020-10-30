@@ -1,5 +1,6 @@
 package com.acidentes.backend.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -25,28 +26,27 @@ public class FirebaseService {
 
 
 	// Fetch radar Details
-	public Radar getRadarDetails(String itemId) throws InterruptedException, ExecutionException {
+	public List<Radar> getRadar() throws InterruptedException, ExecutionException {
 
 		Firestore db = FirestoreClient.getFirestore();
 		// Working Query
 		//ApiFuture<QuerySnapshot> future = db.collection("radares").whereEqualTo("itemID", itemId).limit(1).get();
 		
 		
-		ApiFuture<QuerySnapshot> future = db.collection("radares").orderBy("itemID").startAt(itemId).limit(1).get();
+		ApiFuture<QuerySnapshot> future = db.collection("radares").orderBy("itemID").startAt(0).get();
 		
 		
 		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+
+		List<Radar> radares = new ArrayList<Radar>();
 		
 		for (DocumentSnapshot document : documents) {
-			
-			Radar radar = null;
-			
 			if (document.exists()) {
-				radar = document.toObject(Radar.class);
-				return radar;
-			} 
+				radares.add(document.toObject(Radar.class));
+			}
 		}
-		return null;
+		if(radares.size() > 0) return radares;
+		else return null;
 	}
 
 		public Placa getTransitBoardDetails(String itemId) throws InterruptedException, ExecutionException {

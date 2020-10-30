@@ -1,5 +1,6 @@
 let map;
 
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -30.027955, lng: -51.163046 },
@@ -8,13 +9,14 @@ function initMap() {
 }
 
 
-function newMapMark(lat,lng,label) {
+function newMapMark(lat,lng,label,icon) {
 
   var myLatLng = new google.maps.LatLng(lat, lng);
 
   var myMarkerOptions = {
     position: myLatLng,
     label: label,
+    icon: 'assets/images/map/' + icon + '.png',
     map: map
   }
   console.log("pingou mapa")

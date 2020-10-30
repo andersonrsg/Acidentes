@@ -1,5 +1,6 @@
 package com.acidentes.backend;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +47,11 @@ public class APIController {
 		
 		return firebaseService.getWeatherDetail("100");
 	}
-	
-	@GetMapping(path = "getRadar/{radarId}")
-	public @ResponseBody Radar getRadar(@PathVariable String radarId) throws InterruptedException, ExecutionException {
+
+	@GetMapping(path = "getRadar")
+	public @ResponseBody List<Radar> getRadar() throws InterruptedException, ExecutionException {
 		
-		return firebaseService.getRadarDetails(radarId);
+		return firebaseService.getRadar();
 	}
 	
 	@GetMapping("/getTransitBoard") 
