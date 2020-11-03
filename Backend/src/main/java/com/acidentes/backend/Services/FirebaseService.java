@@ -53,6 +53,29 @@ public class FirebaseService {
 		else return null;
 	}
 
+	public List<Placa> getPlaca() throws InterruptedException, ExecutionException {
+
+		Firestore db = FirestoreClient.getFirestore();
+		
+//		ApiFuture<QuerySnapshot> future = db.collection("placas").whereEqualTo("descricao", "1ADA OBRIGATÓRIA").get();
+		ApiFuture<QuerySnapshot> future = db.collection("placas").orderBy("itemID").startAt(0).get();
+		
+		
+		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+
+		List<Placa> placas = new ArrayList<Placa>();
+		
+		System.out.print(placas.size());
+		
+		for (DocumentSnapshot document : documents) {
+			if (document.exists()) {
+				placas.add(document.toObject(Placa.class));
+			}
+		}
+		if(placas.size() > 0) return placas;
+		else return null;
+	}
+
 		public Placa getTransitBoardDetails(String itemId) throws InterruptedException, ExecutionException {
 
 			Firestore db = FirestoreClient.getFirestore();
