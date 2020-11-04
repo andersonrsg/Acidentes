@@ -15,9 +15,10 @@ public class Accident {
 	private int numero;
 	private int periodo;
 	private int tipoAcid;
+	private long Timestamp;
 	
 	public Accident(String data, int diaSemana, String hora, long idacidente, String itemID, Double latitude,
-			Double longitude, String log1, String log2, int numero, int periodo, int tipoAcid) {
+			Double longitude, String log1, String log2, int numero, int periodo, int tipoAcid, long timestamp) {
 		super();
 		this.data = data;
 		this.diaSemana = diaSemana;
@@ -31,6 +32,7 @@ public class Accident {
 		this.numero = numero;
 		this.periodo = periodo;
 		this.tipoAcid = tipoAcid;
+		this.Timestamp = timestamp;
 	}
 	
 	public Accident() {
@@ -132,6 +134,14 @@ public class Accident {
 
 	public void setTipoAcid(int tipoAcid) {
 		this.tipoAcid = tipoAcid;
+	}
+	
+	public long getTimestamp() {
+		return Timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.Timestamp = timestamp;
 	}
 
 	@Override

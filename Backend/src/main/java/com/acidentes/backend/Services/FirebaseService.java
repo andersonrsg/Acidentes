@@ -28,6 +28,7 @@ import models.Lombada;
 import models.Placa;
 import models.Radar;
 import models.WeatherAccident;
+import models.WeatherAccidentAccidents;
 import utils.ApiUtils;
 import utils.ApiUtils.APIClass;
 
@@ -63,7 +64,7 @@ public class FirebaseService {
 
 		Firestore db = FirestoreClient.getFirestore();
 		
-//		ApiFuture<QuerySnapshot> future = db.collection("placas").whereEqualTo("descricao", "1ADA OBRIGATÓRIA").get();
+//		ApiFuture<QuerySnapshot> future = db.collection("placas").whereEqualTo("descricao", "1ADA OBRIGATï¿½RIA").get();
 		ApiFuture<QuerySnapshot> future = db.collection("placas").orderBy("itemID").startAt(0).get();
 		
 		
@@ -157,7 +158,7 @@ public class FirebaseService {
 
 			// Weather
 			long startDateWeatherFirebaseString = ApiUtils.dateToAPILong(startDate);
-//			long endDateWeatherFirebaseString = ApiUtils.dateToAPIString(APIClass.weather, endDate);
+			long endDateWeatherFirebaseString = ApiUtils.dateToAPILong(endDate);
 //			
 //			// Accidents
 //			long startDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, startDate);
@@ -168,7 +169,7 @@ public class FirebaseService {
 			// Weather
 //			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").startAt("Data", startDateWeatherFirebaseString).endAt("Data", endDateWeatherFirebaseString).orderBy("Data").limit(200).get();
 //			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").whereGreaterThan("Data", startDateWeatherFirebaseString).limit(25).get();
-			ApiFuture<QuerySnapshot> future = db.collection("clima").whereGreaterThan("Timestamp", startDateWeatherFirebaseString).limit(10).get();			
+			ApiFuture<QuerySnapshot> future = db.collection("clima").whereGreaterThan("Timestamp", startDateWeatherFirebaseString).get();			
 			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 			WeatherAccident weatherAccident = new WeatherAccident();
 			System.out.println("Documents: " + documents);
@@ -184,26 +185,30 @@ public class FirebaseService {
 			}
 			
 			
-			
-			
-			
-
-			
 			// Aciddents
-//			ApiFuture<QuerySnapshot> future = db.collection("radares").whereGreaterThan("data", ApiUtils.dateToAPIString(ApiUtils.APIClass.accident, startDate)).whereLessThan("data", ApiUtils.dateToAPIString(ApiUtils.APIClass.accident, endDate)).limit(10).get();			
-//			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-//			WeatherAccident weatherAccident = new WeatherAccident();
-//			
-//			for (DocumentSnapshot document: documents) {
-//				Clima weather = null;
-//				
-//				if (document.exists()) {
-//					weather = document.toObject(Clima.class);
-//					weatherAccident.weathers.add(weather);
-//				} 
-//			}
+			ApiFuture<QuerySnapshot> futureAccidents = db.collection("acidentesAll")
+					.whereGreaterThan("Timestamp", startDateWeatherFirebaseString)
+					.whereLessThan("Timestamp", endDateWeatherFirebaseString)
+					.get();
 			
+			List<QueryDocumentSnapshot> documentsAccidents = futureAccidents.get().getDocuments();
 			
+			for (DocumentSnapshot document: documentsAccidents) {
+				WeatherAccidentAccidents accident = null;
+				
+				if (document.exists()) {
+					
+						accident = document.toObject(WeatherAccidentAccidents.class);
+						weatherAccident.accidents.add(accident);
+						System.out.println(accident.toString());	
+					
+				} 
+			}
+			
+			for (WeatherAccidentAccidents a: weatherAccident.accidents) {
+				String d = a.getData();
+				weatherAccident.insertDate(d);
+			}
 			
 			return weatherAccident;
 		}

@@ -34,14 +34,28 @@ function newDataPoint(jsonData) {
     }
 
     var dataPoints2 = [];
+    var dates = new Set(); 
+
     for (precip of jsonData.weathers) {
       var split = precip.data.split("-");
       var timeStamp = precip.timestamp * 1000;
       var d = new Date();
       d.setTime(timeStamp);
       console.log(d);
-      dataPoints1.push( { x:d , y: precip. } );
+
+      // var dd = String(today.getDate()).padStart(2, '0');
+      // var mm = String(today.getMonth() + 1).padStart(2, '0');
+      // var yyyy = today.getFullYear();
+
+      // var dStr = dd + "/" + mm + "/" + yyyy
+      // if dates.contains(dStr) {
+      //     dates(dStr)
+      // }
+
+
+      dataPoints2.push( { x:d , y: 1 } );
     }
+
 
 
     console.log(dataPoints1);
