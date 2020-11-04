@@ -5,25 +5,14 @@ public class Clima {
 	private String itemID;
 	private String Data;
 	private String Hora;
-	private long PrecipitacaoTotal;
-	private int UmidadeRelativaAr;
-	private int UmidadeRelativaMax;
-	private int UmidadeRelativaMin;
+	private double PrecipitacaoTotal;
+	private double UmidadeRelativaAr;
+	private double UmidadeRelativaMax;
+	private double UmidadeRelativaMin;
+	private long Timestamp;
 	
-//	public Clima(String itemID, String data, String hora, String precipitacaoTotal, int umidadeRelativaAr,
-//			int umidadeRelativaMax, int umidadeRelativaMin) {
-//		super();
-//		this.itemID = itemID;
-//		Data = data;
-//		Hora = hora;
-//		PrecipitacaoTotal = precipitacaoTotal;
-//		UmidadeRelativaAr = umidadeRelativaAr;
-//		UmidadeRelativaMax = umidadeRelativaMax;
-//		UmidadeRelativaMin = umidadeRelativaMin;
-//	}
-	
-	public Clima(String itemID, String data, String hora, long precipitacaoTotal, int umidadeRelativaAr,
-			int umidadeRelativaMax, int umidadeRelativaMin) {
+	public Clima(String itemID, String data, String hora, double precipitacaoTotal, double umidadeRelativaAr,
+			double umidadeRelativaMax, double umidadeRelativaMin, long timestamp) {
 		super();
 		this.itemID = itemID;
 		Data = data;
@@ -32,6 +21,7 @@ public class Clima {
 		UmidadeRelativaAr = umidadeRelativaAr;
 		UmidadeRelativaMax = umidadeRelativaMax;
 		UmidadeRelativaMin = umidadeRelativaMin;
+		Timestamp = timestamp;
 	}
 	
 	public Clima() {
@@ -63,39 +53,52 @@ public class Clima {
 		Hora = hora;
 	}
 
-//	public String getPrecipitacaoTotal() {
-//		return PrecipitacaoTotal;
-//	}
-//
-//	public void setPrecipitacaoTotal(String precipitacaoTotal) {
-//		PrecipitacaoTotal = precipitacaoTotal;
-//	}
+	public double getPrecipitacaoTotal() {
+		return PrecipitacaoTotal;
+	}
 
-	public int getUmidadeRelativaAr() {
+	public void setPrecipitacaoTotal(double precipitacaoTotal) {
+		PrecipitacaoTotal = precipitacaoTotal;
+	}
+
+	public double getUmidadeRelativaAr() {
 		return UmidadeRelativaAr;
 	}
 
-	public void setUmidadeRelativaAr(int umidadeRelativaAr) {
+	public void setUmidadeRelativaAr(double umidadeRelativaAr) {
 		UmidadeRelativaAr = umidadeRelativaAr;
 	}
 
-	public int getUmidadeRelativaMax() {
+	public double getUmidadeRelativaMax() {
 		return UmidadeRelativaMax;
 	}
 
-	public void setUmidadeRelativaMax(int umidadeRelativaMax) {
+	public void setUmidadeRelativaMax(double umidadeRelativaMax) {
 		UmidadeRelativaMax = umidadeRelativaMax;
 	}
 
-	public int getUmidadeRelativaMin() {
+	public double getUmidadeRelativaMin() {
 		return UmidadeRelativaMin;
 	}
 
-	public void setUmidadeRelativaMin(int umidadeRelativaMin) {
+	public void setUmidadeRelativaMin(double umidadeRelativaMin) {
 		UmidadeRelativaMin = umidadeRelativaMin;
 	}
-	
-	
-	
+
+	public long getTimestamp() {
+		return Timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		Timestamp = timestamp;
+	}
+
+	@Override
+	public String toString() {
+		return "Clima [itemID=" + itemID + ", Data=" + Data + ", Hora=" + Hora + ", PrecipitacaoTotal="
+				+ PrecipitacaoTotal + ", UmidadeRelativaAr=" + UmidadeRelativaAr + ", UmidadeRelativaMax="
+				+ UmidadeRelativaMax + ", UmidadeRelativaMin=" + UmidadeRelativaMin + ", Timestamp=" + Timestamp + "]";
+	}
+
 	
 }

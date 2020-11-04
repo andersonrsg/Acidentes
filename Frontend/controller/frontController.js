@@ -26,7 +26,6 @@ function findRadarById() {
     });
 }
 
-
 function getRadar() {
     $.ajax({
         type : "GET",
@@ -87,6 +86,23 @@ function findWeatherAccident() {
             console.log("x")
         }
     });
+}
+
+function findAccidentSpeedMonitor() {
+    var fromDate = document.getElementById("fromDate").value.replaceAll("/", "-");
+    var toDate = document.getElementById("toDate").value.replaceAll("/", "-");
+    // $.ajax({
+    //     type : "GET",
+    //     url : defaultUrl + "getWeatherAccidentsGraph/" + fromDate + "/" + toDate,
+    //     success : function (data) {
+    //         console.log(data)
+    //         var weatherAccident = JSON.parse(JSON.stringify(data))
+            
+            // newDataPoint(weatherAccident);
+    //     }, error: function () {
+    //         console.log("x")
+    //     }
+    // });
 }
 
 

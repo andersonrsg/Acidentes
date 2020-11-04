@@ -14,16 +14,18 @@
     <script type="text/javascript" src="controller/frontController.js"></script>
 
     <!-- Bottom Graph -->
+    <script type="text/javascript" src="canvasjs.min.js"></script>
     <script type="text/javascript" src="controller/chart1.js"></script>
-    <script src="canvasjs.min.js"></script>
-    <script>
-      window.onload = function () {
+    
+    <script type="text/javascript" src="controller/chart1.js">
+      $.noConflict();
+      window.onload = jQuery(document).ready(function ($) {
         initChart();
         chart.render();
-      }
+      });
     </script>
-
-
+    
+    
     <!-- Map Controller -->
     <script type="text/javascript" src="controller/map.js"></script>
     <script type="text/javascript" src="controller/chart.js"></script>
@@ -78,16 +80,16 @@
             })
             .on( "change", function() {
               from.datepicker( "option", "maxDate", getDate( this ) );
+              findWeatherAccident();
             });
        
-            function getDate( element ) {
+          function getDate( element ) {
               var date;
               try {
                 date = $.datepicker.parseDate( dateFormat, element.value );
               } catch( error ) {
                 date = null;
               }
-       
             return date;
           }
         });
