@@ -2,7 +2,9 @@ package com.acidentes.backend.Services;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.stereotype.Service;
@@ -14,9 +16,13 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
 
+import models.Accident;
+import models.AccidentSpeedMonitor;
 import models.Clima;
 import models.Lombada;
 import models.Placa;
@@ -102,6 +108,7 @@ public class FirebaseService {
 
 		public Clima getWeatherDetail(String itemId) throws InterruptedException, ExecutionException {
 
+			
 			Firestore db = FirestoreClient.getFirestore();
 			// Working Query
 			//ApiFuture<QuerySnapshot> future = db.collection("radares").whereEqualTo("itemID", itemId).limit(1).get();
@@ -125,33 +132,39 @@ public class FirebaseService {
 		
 		public WeatherAccident getWeatherAccidentDetail(String startDate, String endDate) throws InterruptedException, ExecutionException {
 
-			
 			// Weather
-			String startDateWeatherFirebaseString = ApiUtils.dateToAPIString(APIClass.weather, startDate);
-			String endDateWeatherFirebaseString = ApiUtils.dateToAPIString(APIClass.weather, endDate);
-			
-			// Accidents
-			String startDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, startDate);
-			String endDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, endDate);
-			
-			
-			
+			long startDateWeatherFirebaseString = ApiUtils.dateToAPILong(startDate);
+//			long endDateWeatherFirebaseString = ApiUtils.dateToAPIString(APIClass.weather, endDate);
+//			
+//			// Accidents
+//			long startDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, startDate);
+//			long endDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, endDate);
+//			
 			Firestore db = FirestoreClient.getFirestore();
 			
 			// Weather
-//			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").whereGreaterThan("Data", startDateWeatherFirebaseString).whereLessThan("Data", endDateWeatherFirebaseString).limit(10).get();
-			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").limit(10).get();			
+//			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").startAt("Data", startDateWeatherFirebaseString).endAt("Data", endDateWeatherFirebaseString).orderBy("Data").limit(200).get();
+//			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").whereGreaterThan("Data", startDateWeatherFirebaseString).limit(25).get();
+			ApiFuture<QuerySnapshot> future = db.collection("clima").whereGreaterThan("Timestamp", startDateWeatherFirebaseString).limit(10).get();			
 			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 			WeatherAccident weatherAccident = new WeatherAccident();
 			System.out.println("Documents: " + documents);
 			for (DocumentSnapshot document: documents) {
-				Clima weather = null;
-				System.out.println(document);	
+				Map<String, Object> docData = new HashMap<>();
+				long date = 0;
+				
+				Clima weather = null;	
 				if (document.exists()) {
 					weather = document.toObject(Clima.class);
 					weatherAccident.weathers.add(weather);
-				} 
+				} 				
 			}
+			
+			
+			
+			
+			
+
 			
 			// Aciddents
 //			ApiFuture<QuerySnapshot> future = db.collection("radares").whereGreaterThan("data", ApiUtils.dateToAPIString(ApiUtils.APIClass.accident, startDate)).whereLessThan("data", ApiUtils.dateToAPIString(ApiUtils.APIClass.accident, endDate)).limit(10).get();			
@@ -172,8 +185,51 @@ public class FirebaseService {
 			return weatherAccident;
 		}
 		
+
+		public AccidentSpeedMonitor getAccidentSpeedMonitor(String startDate, String endDate) throws InterruptedException, ExecutionException {
+			
+			return new AccidentSpeedMonitor();
+		
+		}
 		
 		
+		public void updateTimestamp() throws InterruptedException, ExecutionException {
+
+			Firestore db = FirestoreClient.getFirestore();
+			
+			ApiFuture<QuerySnapshot> future = db.collection("cat_acidentes").whereLessThan("latitude", 0).limit(10).get();			
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+//			WeatherAccident weatherAccident = new WeatherAccident();
+			
+			List<Accident> accidents = new ArrayList<Accident>();
+			
+			System.out.println("Documents: " + documents);
+			for (DocumentSnapshot document: documents) {
+				System.out.println("value:" + document.getString("latitude"));
+				Map<String, Object> docData = new HashMap<>();
+				long date = 0;
+				Accident accident = null;	
+				
+				if (document.exists()) {
+					accident = document.toObject(Accident.class);
+					accidents.add(accident);
+					System.out.println(accident.toString());
+					
+					docData.put("Timestamp", ApiUtils.getDate(accident.getData(), accident.getHora(), ApiUtils.APIClass.accident));
+					
+					
+					ApiFuture<WriteResult> write = db.collection("cat_acidentes").document(document.getId()).set(docData, SetOptions.merge());
+					
+					System.out.println(document.toObject(Accident.class).toString());
+					
+					write.get();
+					
+				} 				
+				
+
+			}
+			
+		}
 		
 
 }
