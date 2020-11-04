@@ -56,6 +56,12 @@ public class APIController {
 		return firebaseService.getRadar();
 	}
 	
+	@GetMapping(path = "getPlaca")
+	public @ResponseBody List<Placa> getPlaca() throws InterruptedException, ExecutionException {
+		
+		return firebaseService.getPlaca();
+	}
+	
 	@GetMapping("/getTransitBoard") 
 	public Placa getTransitBoard() throws InterruptedException, ExecutionException {
 		

@@ -19,6 +19,6 @@ function newMapMark(lat,lng,label,icon) {
     icon: 'assets/images/map/' + icon + '.png',
     map: map
   }
-  console.log("pingou mapa")
+  console.log("pingou mapa " + icon)
   var myMarker = new google.maps.Marker(myMarkerOptions);
 }

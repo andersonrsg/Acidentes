@@ -33,16 +33,22 @@ function getRadar() {
         success : function (data) {
             console.log(data)
             var radar = JSON.parse(JSON.stringify(data))
+            let limites = [0,0,0,0,0] // km30,40,60,80,99
             for (i = 0; i < radar.length; i++) {
+                if(radar[i].limite == 30) limites[0]++;
+                else if(radar[i].limite == 40) limites[1]++;
+                else if(radar[i].limite == 60) limites[2]++;
+                else if(radar[i].limite == 80) limites[3]++;
+                else limites[4]++;
                 newMapMark(radar[i].latitude, radar[i].longitude, '', 'radar')
             }
+            graficoRadares(limites);
+            console.log(limites)
         }, error: function () {
             console.log("x")
         }
     });
 }
-
-
 
 function getPlaca() {
     $.ajax({
@@ -50,12 +56,14 @@ function getPlaca() {
         url : defaultUrl + "getPlaca",
         success : function (data) {
             console.log(data)
+            //console.log("mah oe")
             var placa = JSON.parse(JSON.stringify(data))
             for (i = 0; i < placa.length; i++) {
-                if(placa.descricao == '1ADA OBRIGATÓRIA')
-                newMapMark(placa[i].latitude, placa[i].longitude, '', 'pare')
-                else if(placa.descricao == 'pref ....')
-                newMapMark(placa[i].latitude, placa[i].longitude, '', 'preferencia')
+                if(placa[i].descricao == "PARADA OBRIGATORIA")
+                    newMapMark(placa[i].latitude, placa[i].longitude, '', 'pare')
+                else if(placa[i].descricao == "DE A PREFERENCIA")
+                    newMapMark(placa[i].latitude, placa[i].longitude, '', 'preferencia')
+                else newMapMark(placa[i].latitude, placa[i].longitude, '', 'escola')
             }
         }, error: function () {
             console.log("x")
