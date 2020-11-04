@@ -71,7 +71,7 @@ public class APIController {
 	@GetMapping("/getWeatherAccidentsGraph/{startDate}/{endDate}") 
 	public WeatherAccident getWeatherAccidents(@PathVariable String startDate, @PathVariable String endDate) throws InterruptedException, ExecutionException {
 
-		firebaseService.updateTimestamp();
+	
 		return firebaseService.getWeatherAccidentDetail(startDate, endDate);
 	}
 	
