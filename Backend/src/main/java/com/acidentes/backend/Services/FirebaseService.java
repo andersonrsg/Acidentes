@@ -169,7 +169,11 @@ public class FirebaseService {
 			// Weather
 //			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").startAt("Data", startDateWeatherFirebaseString).endAt("Data", endDateWeatherFirebaseString).orderBy("Data").limit(200).get();
 //			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").whereGreaterThan("Data", startDateWeatherFirebaseString).limit(25).get();
-			ApiFuture<QuerySnapshot> future = db.collection("clima").whereGreaterThan("Timestamp", startDateWeatherFirebaseString).get();			
+			ApiFuture<QuerySnapshot> future = db.collection("clima")
+					.whereGreaterThan("Timestamp", startDateWeatherFirebaseString)
+					.whereLessThan("Timestamp", endDateWeatherFirebaseString)
+					.get();
+			
 			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 			WeatherAccident weatherAccident = new WeatherAccident();
 			System.out.println("Documents: " + documents);
@@ -198,9 +202,9 @@ public class FirebaseService {
 				
 				if (document.exists()) {
 					
-						accident = document.toObject(WeatherAccidentAccidents.class);
-						weatherAccident.accidents.add(accident);
-						System.out.println(accident.toString());	
+					accident = document.toObject(WeatherAccidentAccidents.class);
+					weatherAccident.accidents.add(accident);
+					System.out.println(accident.toString());	
 					
 				} 
 			}
