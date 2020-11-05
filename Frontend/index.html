@@ -188,29 +188,21 @@
                 <div class="card">
                   <div class="card-body d-flex flex-column">
                     <div class="wrapper">
-                      <h4 class="card-title mb-0">Net Profit Margin</h4>
+                      <h4 class="card-title mb-0">Gráficos</h4>
                       <p>Started collecting data from February 2019</p>
                       <div class="mb-4" id="net-profit-legend"></div>
                     </div>
                     <!-- Map right side -->
-                    <p>.</p>
-                    <button type="button" onclick="initMap()">getAll</button>
-                    <p>.</p>
-                    <canvas id="chartRadares"></canvas>
-                    <p>.</p>
-                    <p id="testRest">.</p>
-                    <p>.</p>
-                    <p>.</p>
-                    <p>.</p>
-                    <p>.</p>
-                    <button type="button" onclick="getAll()">getAll</button>
-                    <input id="idRadar" type="text" placeholder="Numero do Radar" />
-                    <button type="button" onclick="getRadar()">getRadar</button>
-                    <button type="button" onclick="getPlaca()">getPlaca</button>
-                    <button type="button" onclick="findRadarById()">parseGrah</button>
-                    <p>.</p>
-                    <p>.</p>
                     
+                    <p>
+                      <button type="button" onclick="getAll()">getAll</button>
+                      <button type="button" onclick="getRadar()">Radares</button>
+                      <button type="button" onclick="getPlaca()">Placas</button>
+                      <button type="button" onclick="findRadarById()">parseGrah</button>
+                    </p>
+
+                    <canvas id="chartRadares"></canvas>
+                    <p id="testRest"></p>
                   </div>
                 </div>
               </div>
