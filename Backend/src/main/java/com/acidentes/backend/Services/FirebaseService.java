@@ -175,7 +175,7 @@ public class FirebaseService {
 					.get();
 			
 			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-			WeatherAccident weatherAccident = new WeatherAccident();
+			WeatherAccident weatherAccident = new WeatherAccident(startDate, endDate);
 			System.out.println("Documents: " + documents);
 			for (DocumentSnapshot document: documents) {
 				Map<String, Object> docData = new HashMap<>();

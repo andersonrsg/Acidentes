@@ -16,15 +16,17 @@ public class ApiUtils {
 	
 	public enum APIClass {
 		accident,
-		weather;
+		weather,
+		front;
 		
 		public String getFormat() {
 			switch (this) {
 			case accident:
 			case weather:
 				return "yyyy-MM-dd";
-				default:
-					return frontDateFormat;
+			case front:
+			default:
+				return frontDateFormat;
 		}
 			
 		}
@@ -62,5 +64,12 @@ public class ApiUtils {
 		
 	}
 	
+	public static LocalDate getDate(String date, APIClass format) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format.getFormat(), Locale.forLanguageTag("pt/BR"));
+		String dateString = date.strip();
+		LocalDate value = LocalDate.parse(dateString, formatter);
+		
+		 return value;
+	}
 	
 }
