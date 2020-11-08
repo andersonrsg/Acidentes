@@ -1,5 +1,6 @@
 package com.acidentes.backend;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -32,6 +33,12 @@ public class APIController {
 
 	@Autowired
 	FirebaseService firebaseService;
+	
+	ServiceManager serviceManager;
+	
+	public APIController() {
+		serviceManager = new ServiceManager();
+	}
 
 	@GetMapping(path = "getAll")
 	public @ResponseBody String getAll() {
@@ -75,6 +82,12 @@ public class APIController {
 		return firebaseService.getWeatherAccidentDetail(startDate, endDate);
 	}
 	
+	@GetMapping("/getAccidentsByAgeGroup/{type}")///{startDate}/{endDate}") @PathVariable String startDate, @PathVariable String endDate 
+	public APIAge getAccidentsByAgeGroup(@PathVariable String type) throws InterruptedException, ExecutionException {
+
+	
+		return serviceManager.getAccidentsByAgeGroup(firebaseService, type.equals("Todos") ? false : true, "10-10-2020", "10-10-2020");
+	}
 	
 }
 

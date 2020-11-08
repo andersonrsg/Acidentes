@@ -22,7 +22,7 @@ function newDataPoint(jsonData) {
       var timeStamp = precip.timestamp * 1000;
       var d = new Date();
       d.setTime(timeStamp);
-      console.log(d);
+      // console.log(d);
       dataPoints1.push( { x:d , y: precip.precipitacaoTotal } );
     }
 
@@ -35,13 +35,13 @@ function newDataPoint(jsonData) {
       dataPoints2.push( { x:d , y: dateC.count } );
     }
 
-    console.log(dataPoints1);
+    // console.log(dataPoints1);
 
     var config = {
       animationEnabled: true,
       theme: "light2",
       title:{
-        text: "Acidentes por precipitação total"
+        text: "Relação de acidentes com precipitação no horário"
       },
       axisX:{
         valueFormatString: "DD MMM YYYY",

@@ -21,6 +21,8 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
 
+import models.APIAge;
+import models.APIAgeParser;
 import models.Accident;
 import models.AccidentSpeedMonitor;
 import models.Clima;
@@ -154,21 +156,46 @@ public class FirebaseService {
 			return null;
 		}
 		
-		public WeatherAccident getWeatherAccidentDetail(String startDate, String endDate) throws InterruptedException, ExecutionException {
+		public APIAge getAccidentsByAgeGroup(boolean fatal, String startDate, String endDate) throws InterruptedException, ExecutionException {
 
-			// Weather
 			long startDateWeatherFirebaseString = ApiUtils.dateToAPILong(startDate);
 			long endDateWeatherFirebaseString = ApiUtils.dateToAPILong(endDate);
-//			
-//			// Accidents
-//			long startDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, startDate);
-//			long endDateAccidentsFirebaseString = ApiUtils.dateToAPIString(APIClass.accident, endDate);
-//			
+			
+			Firestore db = FirestoreClient.getFirestore();
+			
+//			if (!fatal) {
+//				return new APIAge();
+//			}
+			
+			
+//			String collection = fatal ? "acidentesFataisPessoas" : "acidentesPessoas";
+			String collection = "acidentesFataisPessoas";
+			ApiFuture<QuerySnapshot> future = db.collection(collection).limit(50).get();
+			
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			
+			APIAge ages = new APIAge();
+			
+			for (DocumentSnapshot document: documents) {
+				APIAgeParser age = null;
+				
+				if (document.exists()) {
+					age = document.toObject(APIAgeParser.class);
+					
+					ages.insertValue(age.idade);
+				} 
+			}
+			return ages;
+		}
+		
+		public WeatherAccident getWeatherAccidentDetail(String startDate, String endDate) throws InterruptedException, ExecutionException {
+
+			long startDateWeatherFirebaseString = ApiUtils.dateToAPILong(startDate);
+			long endDateWeatherFirebaseString = ApiUtils.dateToAPILong(endDate);
+			
 			Firestore db = FirestoreClient.getFirestore();
 			
 			// Weather
-//			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").startAt("Data", startDateWeatherFirebaseString).endAt("Data", endDateWeatherFirebaseString).orderBy("Data").limit(200).get();
-//			ApiFuture<QuerySnapshot> future = db.collection("inmet_2015_2020").whereGreaterThan("Data", startDateWeatherFirebaseString).limit(25).get();
 			ApiFuture<QuerySnapshot> future = db.collection("clima")
 					.whereGreaterThan("Timestamp", startDateWeatherFirebaseString)
 					.whereLessThan("Timestamp", endDateWeatherFirebaseString)

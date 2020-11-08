@@ -16,15 +16,35 @@
     <!-- Bottom Graph -->
     <script type="text/javascript" src="canvasjs.min.js"></script>
     <script type="text/javascript" src="controller/chart1.js"></script>
-    
+    <script type="text/javascript" src="controller/donutChartAge.js">
+      $.noConflict();
+      window.onload = jQuery(document).ready(function ($) {
+        
+      });
+    </script>
+
     <script type="text/javascript" src="controller/chart1.js">
       $.noConflict();
       window.onload = jQuery(document).ready(function ($) {
+        
         initChart();
         chart.render();
       });
     </script>
-    
+
+    <!-- Map Type Picker -->
+    <script>
+      // $.noConflict();
+      // window.onload = jQuery(document).ready(function ($) {
+      //   $( "#speed" ).selectmenu();
+      // });
+      window.addEventListener("load", myInit, true); 
+      function myInit() {  
+        findAges();
+      }; 
+
+
+    </script>
     
     <!-- Map Controller -->
     <script type="text/javascript" src="controller/map.js"></script>
@@ -81,6 +101,8 @@
             .on( "change", function() {
               from.datepicker( "option", "maxDate", getDate( this ) );
               findWeatherAccident();
+              findAges();
+
             });
        
           function getDate( element ) {
@@ -136,10 +158,41 @@
               </div>
               <div class="col-md-12">
                 <div class="page-header-toolbar">
-                  <label for="from">De </label>
-                  <input type="text" autocomplete="off" id="fromDate" name="fromDate" placeholder="Data Inicial">
-                  <label for="to"> Até </label>
-                  <input type="text" autocomplete="off" id="toDate" name="toDate" placeholder="Data Final">
+                  <div class="page-date-picker">
+                    <label for="from">De </label>
+                    <input type="text" autocomplete="off" id="fromDate" name="fromDate" placeholder="Data Inicial">
+                    <label for="to"> Até </label>
+                    <input type="text" autocomplete="off" id="toDate" name="toDate" placeholder="Data Final">
+                  </div>
+                  
+                  <div class="page-accident-type-picker-container">
+                    <div class="page-accident-type-picker">
+                      <form action="#">
+                        <fieldset>
+                          <label for="speed">Tipo de acidente:</label>
+                          <select name="speed" id="accidentSelect">
+                            <option selected="selected">Todos</option>
+                            <option>Fatais</option>
+                          </select>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+
+                  <div class="page-map-type-picker-container">
+                    <div class="page-map-type-picker">
+                      <form action="#">
+                        <fieldset>
+                          <label for="speed">Selecione dados do mapa</label>
+                          <select name="speed" id="speed">
+                            <option selected="selected">Mapa de acidentes</option>
+                            <option>Placas</option>
+                          </select>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+
                   <!-- <div class="btn-group toolbar-item" role="group" aria-label="Basic example"> 
                     <button type="button" class="btn btn-secondary"><i class="mdi mdi-chevron-left"></i></button>
                     <button type="button" class="btn btn-secondary">03/02/2019 - 20/08/2019</button>
@@ -208,7 +261,18 @@
               </div>
             </div>
 
-            <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+          <div class="row">
+            <div id="ageChart" style="height: 300px; width: 300px; margin: 0px auto;">
+              <canvas id="doughnut-age-chart" width="100" height="100"></canvas>  
+            </div>
+
+            <div id="ageChart" style="height: 300px; width: 300px; margin: 0px auto;">
+              <canvas id="doughnut-age-chart" width="100" height="100"></canvas>  
+            </div>            
+          </div>          
+
+          <div id="chartContainer" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
+          
 
           </div>
           <!-- content-wrapper ends -->

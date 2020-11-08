@@ -747,4 +747,19 @@
   #dashboard-vmap .jvectormap-zoomout {
     display: none; }
 
+/*.page-map-type-picker-container { 
+  height: 50px;
+  position: relative;
+}*/
+/*
+.page-map-type-picker { 
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}*/
+
+
 /*# sourceMappingURL=style.css.map */

@@ -105,6 +105,24 @@ function findAccidentSpeedMonitor() {
     // });
 }
 
+function findAges() {
+    var selected = document.getElementById("accidentSelect").value
+    var fromDate = document.getElementById("fromDate").value.replaceAll("/", "-");
+    var toDate = document.getElementById("toDate").value.replaceAll("/", "-");
+    $.ajax({
+        type : "GET",
+        url : defaultUrl + "getAccidentsByAgeGroup/" + selected,// + "/" + fromDate + "/" + toDate,
+        success : function (data) {
+            console.log(data)
+            var ages = JSON.parse(JSON.stringify(data))
+            
+            graficoIdade(ages);
+        }, error: function () {
+            console.log("x")
+        }
+    });
+}
+
 
 function mudaop(){
     document.getElementById("testRest").innerHTML = "Paragraph changed!";
