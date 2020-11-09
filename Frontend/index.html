@@ -53,8 +53,9 @@
     <!-- Map Controller -->
     <script type="text/javascript" src="controller/map.js"></script>
     <script type="text/javascript" src="controller/chart.js"></script>
+    <script type="text/javascript" src="controller/heatMapData.js"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqWR38L4RRN7k4UWAr2eeOh5ZGXH0bb08&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqWR38L4RRN7k4UWAr2eeOh5ZGXH0bb08&callback=initMap&libraries=visualization&v=weekly"
       defer
     ></script>
 
@@ -251,11 +252,12 @@
                     <!-- Map right side -->
                     
                     <p>
-                      <button type="button" onclick="getAll()">getAll</button>
+                      <button type="button" onclick="heatMap()">HeatMap</button>
                       <button type="button" onclick="getRadar()">Radares</button>
                       <button type="button" onclick="getPlaca()">Placas</button>
                       <button type="button" onclick="findRadarById()">parseGrah</button>
                     </p>
+                    <p>.</p><p>.</p><p>.</p>
 
                     <canvas id="chartRadares"></canvas>
                     <p id="testRest"></p>

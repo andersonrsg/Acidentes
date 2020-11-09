@@ -1,5 +1,5 @@
-let map;
 
+let map, heatmap;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -7,7 +7,6 @@ function initMap() {
     zoom: 13,
   });
 }
-
 
 function newMapMark(lat,lng,label,icon) {
 
@@ -21,4 +20,11 @@ function newMapMark(lat,lng,label,icon) {
   }
   console.log("pingou mapa " + icon)
   var myMarker = new google.maps.Marker(myMarkerOptions);
+}
+
+function heatMap() {
+  heatmap = new google.maps.visualization.HeatmapLayer({
+    data: getHeatPoints()
+  });
+  heatmap.setMap(map);
 }
