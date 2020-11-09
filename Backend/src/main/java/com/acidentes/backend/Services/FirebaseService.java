@@ -21,16 +21,7 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
 
-import models.APIAge;
-import models.APIAgeParser;
-import models.Accident;
-import models.AccidentSpeedMonitor;
-import models.Clima;
-import models.Lombada;
-import models.Placa;
-import models.Radar;
-import models.WeatherAccident;
-import models.WeatherAccidentAccidents;
+import models.*;
 import utils.ApiUtils;
 import utils.ApiUtils.APIClass;
 
@@ -290,5 +281,43 @@ public class FirebaseService {
 			
 		}
 		
+		
+		public APIAccidentType getAccidentsType(boolean fatal, String startDate, String endDate) throws InterruptedException, ExecutionException {
 
+			long startDateWeatherFirebaseString = ApiUtils.dateToAPILong(startDate);
+			long endDateWeatherFirebaseString = ApiUtils.dateToAPILong(endDate);
+			
+			Firestore db = FirestoreClient.getFirestore();
+			
+			String collection = fatal ? "acidentesFatais" : "acidentesAll";
+
+			
+			ApiFuture<QuerySnapshot> future = db.collection(collection)
+					.whereGreaterThan("Timestamp", startDateWeatherFirebaseString)
+					.whereLessThan("Timestamp", endDateWeatherFirebaseString)
+					.get();
+			
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			
+			APIAccidentType accidentsType = new APIAccidentType();
+			
+			for (DocumentSnapshot document: documents) {
+				// Gambi
+				APIAccientAllTypeParser type = null;
+				APIFatalAccidentTypeParser typeFatal = null;
+				
+				if (document.exists()) {
+					if (fatal) {
+						typeFatal = document.toObject(APIFatalAccidentTypeParser.class);
+						accidentsType.insertValue(typeFatal);	
+					} else {
+						type = document.toObject(APIAccientAllTypeParser.class);
+						accidentsType.insertValue(type);
+					}
+					
+				} 
+			}
+			System.out.println(accidentsType);
+			return accidentsType;
+		}
 }

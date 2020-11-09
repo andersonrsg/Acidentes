@@ -123,6 +123,23 @@ function findAges() {
     });
 }
 
+function findAccidentType() {
+    var selected = document.getElementById("accidentSelect").value
+    var fromDate = document.getElementById("fromDate").value.replaceAll("/", "-");
+    var toDate = document.getElementById("toDate").value.replaceAll("/", "-");
+    $.ajax({
+        type : "GET",
+        url : defaultUrl + "getAccidentsType/" + selected + "/" + fromDate + "/" + toDate,
+        success : function (data) {
+            console.log(data)
+            var types = JSON.parse(JSON.stringify(data))
+            
+            accidentType(types);
+        }, error: function () {
+            console.log("x")
+        }
+    });
+}
 
 function mudaop(){
     document.getElementById("testRest").innerHTML = "Paragraph changed!";

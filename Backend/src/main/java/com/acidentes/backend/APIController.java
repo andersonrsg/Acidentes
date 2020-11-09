@@ -88,7 +88,12 @@ public class APIController {
 	
 		return serviceManager.getAccidentsByAgeGroup(firebaseService, type.equals("Todos") ? false : true, "10-10-2020", "10-10-2020");
 	}
-	
+
+	@GetMapping("/getAccidentsType/{type}/{startDate}/{endDate}")  
+	public APIAccidentType getAccidentsType(@PathVariable String type, @PathVariable String startDate, @PathVariable String endDate) throws InterruptedException, ExecutionException {
+
+		return firebaseService.getAccidentsType(type.equals("Todos") ? false : true, startDate, endDate);
+	}
 }
 
 

@@ -16,12 +16,8 @@
     <!-- Bottom Graph -->
     <script type="text/javascript" src="canvasjs.min.js"></script>
     <script type="text/javascript" src="controller/chart1.js"></script>
-    <script type="text/javascript" src="controller/donutChartAge.js">
-      $.noConflict();
-      window.onload = jQuery(document).ready(function ($) {
-        
-      });
-    </script>
+    <script type="text/javascript" src="controller/donutChartAge.js"></script>
+    <script type="text/javascript" src="controller/donutChartAccidentType.js"></script>
 
     <script type="text/javascript" src="controller/chart1.js">
       $.noConflict();
@@ -101,8 +97,7 @@
             .on( "change", function() {
               from.datepicker( "option", "maxDate", getDate( this ) );
               findWeatherAccident();
-              findAges();
-
+              findAccidentType();
             });
        
           function getDate( element ) {
@@ -266,8 +261,8 @@
               <canvas id="doughnut-age-chart" width="100" height="100"></canvas>  
             </div>
 
-            <div id="ageChart" style="height: 300px; width: 300px; margin: 0px auto;">
-              <canvas id="doughnut-age-chart" width="100" height="100"></canvas>  
+            <div id="typeChart" style="height: 300px; width: 300px; margin: 0px auto;">
+              <canvas id="doughnut-type-chart" width="100" height="100"></canvas>  
             </div>            
           </div>          
 
