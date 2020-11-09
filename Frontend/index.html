@@ -37,6 +37,14 @@
       window.addEventListener("load", myInit, true); 
       function myInit() {  
         findAges();
+
+        document.getElementById('accidentSelect').addEventListener('change', function() {
+          findAccidentType();
+        });
+
+        document.getElementById('mapData').addEventListener('change', function() {
+          // Dados do mapa aqui
+        });
       }; 
 
 
@@ -164,8 +172,8 @@
                     <div class="page-accident-type-picker">
                       <form action="#">
                         <fieldset>
-                          <label for="speed">Tipo de acidente:</label>
-                          <select name="speed" id="accidentSelect">
+                          <label for="accidentType">Tipo de acidente:</label>
+                          <select name="accidentType" id="accidentSelect">
                             <option selected="selected">Todos</option>
                             <option>Fatais</option>
                           </select>
@@ -178,8 +186,8 @@
                     <div class="page-map-type-picker">
                       <form action="#">
                         <fieldset>
-                          <label for="speed">Selecione dados do mapa</label>
-                          <select name="speed" id="speed">
+                          <label for="mapType">Selecione dados do mapa</label>
+                          <select name="mapType" id="mapData">
                             <option selected="selected">Mapa de acidentes</option>
                             <option>Placas</option>
                           </select>

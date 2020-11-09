@@ -144,3 +144,5 @@ function findAccidentType() {
 function mudaop(){
     document.getElementById("testRest").innerHTML = "Paragraph changed!";
 }
+
+
