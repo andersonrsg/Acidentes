@@ -18,6 +18,7 @@
     <script type="text/javascript" src="controller/chart1.js"></script>
     <script type="text/javascript" src="controller/donutChartAge.js"></script>
     <script type="text/javascript" src="controller/donutChartAccidentType.js"></script>
+    <script type="text/javascript" src="controller/select.js"></script>
 
     <script type="text/javascript" src="controller/chart1.js">
       $.noConflict();
@@ -174,9 +175,11 @@
                       <form action="#">
                         <fieldset>
                           <label for="accidentType">Tipo de acidente:</label>
-                          <select name="accidentType" id="accidentSelect">
-                            <option selected="selected">Todos</option>
-                            <option>Fatais</option>
+                          <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+                          <select name="accidentType" id="accidentSelect" class="custom-select">
+                            <option value="todos" selected="selected">Todos</option>
+                            <option value="fatais">Fatais</option>
                           </select>
                         </fieldset>
                       </form>
@@ -188,14 +191,16 @@
                       <form action="#">
                         <fieldset>
                           <label for="mapType">Selecione dados do mapa</label>
-                          <select name="mapType" id="mapData">
-                            <option selected="selected">Mapa de acidentes</option>
-                            <option>Placas</option>
+                          <select name="mapType" id="mapData" class="custom-select">
+                            <option value="acidentes" selected="selected">Mapa de acidentes</option>
+                            <option value="placass">Placas</option>
                           </select>
                         </fieldset>
                       </form>
                     </div>
                   </div>
+
+                    
 
                   <!-- <div class="btn-group toolbar-item" role="group" aria-label="Basic example"> 
                     <button type="button" class="btn btn-secondary"><i class="mdi mdi-chevron-left"></i></button>
@@ -252,9 +257,16 @@
                     <!-- Map right side -->
                     
                     <p>
+                      <form action="action1">
+                        <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()">
+                        <label for="radarCheckbox"> Radares</label><br>
+                      </form>
+                      <form action="action2">
+                        <input type="checkbox" id="placasCheckbox" name="placas" value="Placas" onclick="getPlaca()">
+                        <label for="radarCheckbox"> Placas</label><br>
+                      </form>
+
                       <button type="button" onclick="heatMap()">HeatMap</button>
-                      <button type="button" onclick="getRadar()">Radares</button>
-                      <button type="button" onclick="getPlaca()">Placas</button>
                       <button type="button" onclick="findRadarById()">parseGrah</button>
                     </p>
                     <p>.</p><p>.</p><p>.</p>
