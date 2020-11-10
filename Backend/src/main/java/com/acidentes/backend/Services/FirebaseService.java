@@ -202,7 +202,9 @@ public class FirebaseService {
 				Clima weather = null;	
 				if (document.exists()) {
 					weather = document.toObject(Clima.class);
-					weatherAccident.weathers.add(weather);
+					if (weather.getPrecipitacaoTotal() >= 0) {
+						weatherAccident.weathers.add(weather);	
+					}
 				} 				
 			}
 			
