@@ -66,7 +66,7 @@ function accidentType(ages) {
     }; 
     
     dognutChartAccidentType = new Chart(ctx, {
-        type: 'pie',
+        type: 'doughnut',
         data: data,
         options: {
             responsive: true,

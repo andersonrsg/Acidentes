@@ -58,7 +58,7 @@ function graficoIdade(ages) {
     }; 
     
     dognutChartAge = new Chart(ctx, {
-        type: 'pie',
+        type: 'doughnut',
         data: data,
         options: {
             responsive: true,

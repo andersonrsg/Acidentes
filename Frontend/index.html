@@ -143,100 +143,10 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <!-- Page Title Header Starts-->
-            <div class="row page-title-header">
-              <div class="col-12">
-                <div class="page-header">
-                  <h4 class="page-title">Dashboard</h4>
-                  <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
-                    <ul class="quick-links">
-                      <li><a href="#">ICE Market data</a></li>
-                      <li><a href="#">Own analysis</a></li>
-                      <li><a href="#">Historic market data</a></li>
-                    </ul>
-                    <ul class="quick-links ml-auto">
-                      <li><a href="#">Settings</a></li>
-                      <li><a href="#">Analytics</a></li>
-                      <li><a href="#">Watchlist</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="page-header-toolbar">
-                  <div class="page-date-picker">
-                    <label for="from">De </label>
-                    <input type="text" autocomplete="off" id="fromDate" name="fromDate" placeholder="Data Inicial">
-                    <label for="to"> Até </label>
-                    <input type="text" autocomplete="off" id="toDate" name="toDate" placeholder="Data Final">
-                  </div>
-                  
-                  <div class="page-accident-type-picker-container">
-                    <div class="page-accident-type-picker">
-                      <form action="#">
-                        <fieldset>
-                          <label for="accidentType">Tipo de acidente:</label>
-                          <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
-                          <select name="accidentType" id="accidentSelect" class="custom-select">
-                            <option value="todos" selected="selected">Todos</option>
-                            <option value="fatais">Fatais</option>
-                          </select>
-                        </fieldset>
-                      </form>
-                    </div>
-                  </div>
-
-                  <div class="page-map-type-picker-container">
-                    <div class="page-map-type-picker">
-                      <form action="#">
-                        <fieldset>
-                          <label for="mapType">Selecione dados do mapa</label>
-                          <select name="mapType" id="mapData" class="custom-select">
-                            <option value="acidentes" selected="selected">Mapa de acidentes</option>
-                            <option value="placass">Placas</option>
-                          </select>
-                        </fieldset>
-                      </form>
-                    </div>
-                  </div>
-
-                    
-
-                  <!-- <div class="btn-group toolbar-item" role="group" aria-label="Basic example"> 
-                    <button type="button" class="btn btn-secondary"><i class="mdi mdi-chevron-left"></i></button>
-                    <button type="button" class="btn btn-secondary">03/02/2019 - 20/08/2019</button>
-                    <button type="button" class="btn btn-secondary"><i class="mdi mdi-chevron-right"></i></button>
-                  </div>
-                  <div class="filter-wrapper">
-                    <div class="dropdown toolbar-item">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownsorting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Day</button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownsorting">
-                        <a class="dropdown-item" href="#">Last Day</a>
-                        <a class="dropdown-item" href="#">Last Month</a>
-                        <a class="dropdown-item" href="#">Last Year</a>
-                      </div>
-                    </div>
-                    <a href="#" class="advanced-link toolbar-item">Advanced Options</a>
-                  </div>
-                  <div class="sort-wrapper">
-                    <button type="button" class="btn btn-primary toolbar-item">New</button>
-                    <div class="dropdown ml-lg-auto ml-3 toolbar-item">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownexport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export</button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownexport">
-                        <a class="dropdown-item" href="#">Export as PDF</a>
-                        <a class="dropdown-item" href="#">Export as DOCX</a>
-                        <a class="dropdown-item" href="#">Export as CDR</a>
-                      </div>
-                    </div>
-                  </div>
-                  -->
-                </div>
-              </div>
-            </div>
-            
             <!-- Mapa -->
             <div class="row">
-              <div class="col-md-8 grid-margin stretch-card">
+              <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div id="map" class="card-body">
                     <!-- MAPA AQUI-->
@@ -244,52 +154,66 @@
                 </div>
               </div>
 
-              <!-- Grafico -->
+              <!-- Filtros e Graficos -->
 
-              <div class="col-md-4 grid-margin stretch-card">
+              <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body d-flex flex-column">
+
+                    <!-- Filtros -->
                     <div class="wrapper">
-                      <h4 class="card-title mb-0">Gráficos</h4>
-                      <p>Started collecting data from February 2019</p>
-                      <div class="mb-4" id="net-profit-legend"></div>
+                      <h4 class="card-title mb-0">Filtros</h4>
+                      <div class="accident-filters row">
+                        <label for="accidentType" class="col-sm-2 col-form-label">Tipo de acidente:</label>
+                        <select class="browser-default custom-select col-sm-2" name="accidentType" id="accidentSelect">
+                          <option selected="selected">Todos</option>
+                          <option>Fatais</option>
+                        </select>
+                        <label for="from" class="col-sm-1 col-form-label text-sm-right">De </label>
+                        <input class="form-control col-sm-2" type="text" autocomplete="off" id="fromDate" name="fromDate" placeholder="Data Inicial">
+                        <label for="to" class="col-sm-1 col-form-label text-sm-right"> Até </label>
+                        <input class="form-control col-sm-2" type="text" autocomplete="off" id="toDate" name="toDate" placeholder="Data Final">
+                        <label for="mapType" class="col-form-label col-sm-3">Selecione dados do mapa</label>
+                        <select class="browser-default custom-select col-sm-3" name="mapType" id="mapData">
+                          <option selected="selected">Mapa de acidentes</option>
+                          <option>Placas</option>
+                        </select>
+                        <p class="col-sm-5">
+                          <button type="button" onclick="heatMap()" class="btn btn-dark mb-2">HeatMap</button>
+                          <button type="button" onclick="findRadarById()" class="btn btn-dark mb-2">parse</button>
+                          <form action="action1">
+                            <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()">
+                            <label for="radarCheckbox"> Radares</label><br>
+                          </form>
+                          <form action="action2">
+                            <input type="checkbox" id="placasCheckbox" name="placas" value="Placas" onclick="getPlaca()">
+                            <label for="radarCheckbox"> Placas</label><br>
+                          </form>
+                        </p>
+                      </div>
                     </div>
-                    <!-- Map right side -->
-                    
-                    <p>
-                      <form action="action1">
-                        <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()">
-                        <label for="radarCheckbox"> Radares</label><br>
-                      </form>
-                      <form action="action2">
-                        <input type="checkbox" id="placasCheckbox" name="placas" value="Placas" onclick="getPlaca()">
-                        <label for="radarCheckbox"> Placas</label><br>
-                      </form>
+                    <!-- Graficos -->
+                    <div class="row">
+                      <div id="ageChart" style="height: 300px; width: 300px; margin: 0px auto;">
+                        <canvas id="chartRadares" width="100" height="100"></canvas>  
+                      </div>
 
-                      <button type="button" onclick="heatMap()">HeatMap</button>
-                      <button type="button" onclick="findRadarById()">parseGrah</button>
-                    </p>
-                    <p>.</p><p>.</p><p>.</p>
-
-                    <canvas id="chartRadares"></canvas>
-                    <p id="testRest"></p>
+                      <div id="ageChart" style="height: 300px; width: 300px; margin: 0px auto;">
+                        <canvas id="doughnut-age-chart" width="100" height="100"></canvas>  
+                      </div>
+          
+                      <div id="typeChart" style="height: 300px; width: 300px; margin: 0px auto;">
+                        <canvas id="doughnut-type-chart" width="100" height="100"></canvas>  
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div id="chartContainer" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
+                    </div>
                   </div>
                 </div>
               </div>
+
             </div>
-
-          <div class="row">
-            <div id="ageChart" style="height: 300px; width: 300px; margin: 0px auto;">
-              <canvas id="doughnut-age-chart" width="100" height="100"></canvas>  
-            </div>
-
-            <div id="typeChart" style="height: 300px; width: 300px; margin: 0px auto;">
-              <canvas id="doughnut-type-chart" width="100" height="100"></canvas>  
-            </div>            
-          </div>          
-
-          <div id="chartContainer" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
-          
 
           </div>
           <!-- content-wrapper ends -->
