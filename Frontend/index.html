@@ -179,16 +179,12 @@
                           <option>Placas</option>
                         </select>
                         <p class="col-sm-5">
-                          <button type="button" onclick="heatMap()" class="btn btn-dark mb-2">HeatMap</button>
-                          <button type="button" onclick="findRadarById()" class="btn btn-dark mb-2">parse</button>
-                          <form action="action1">
-                            <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()">
-                            <label for="radarCheckbox"> Radares</label><br>
-                          </form>
-                          <form action="action2">
-                            <input type="checkbox" id="placasCheckbox" name="placas" value="Placas" onclick="getPlaca()">
-                            <label for="radarCheckbox"> Placas</label><br>
-                          </form>
+                          <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()" class="col-sm-1">
+                          <label for="radarCheckbox" class="col-form-label col-sm-3"> Radares</label>
+                          <input type="checkbox" id="placasCheckbox" name="placas" value="Placas" onclick="getPlaca()" class="col-sm-1">
+                          <label for="radarCheckbox" class="col-form-label col-sm-3"> Placas</label>
+                          <button type="button" onclick="heatMap()" class="btn btn-dark col-sm-3">HeatMap</button>
+                          <!--<button type="button" onclick="findRadarById()" class="btn btn-dark col-sm-3">parse</button>-->
                         </p>
                       </div>
                     </div>
