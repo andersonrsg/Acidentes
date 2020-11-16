@@ -137,8 +137,9 @@ function findAges() {
     var toDate = document.getElementById("toDate").value.replaceAll("/", "-");
     $.ajax({
         type : "GET",
-        url : defaultUrl + "getAccidentsByAgeGroup/" + selected,// + "/" + fromDate + "/" + toDate,
+        url : defaultUrl + "getAccidentsByAgeGroup/" + selected + "/" + fromDate + "/" + toDate,
         success : function (data) {
+            console.log("Ages")
             console.log(data)
             var ages = JSON.parse(JSON.stringify(data))
             

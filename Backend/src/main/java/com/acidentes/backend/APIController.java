@@ -60,7 +60,7 @@ public class APIController {
 	@GetMapping(path = "getRadar")
 	public @ResponseBody List<Radar> getRadar() throws InterruptedException, ExecutionException {
 		
-		return firebaseService.getRadar();
+		return serviceManager.getRadar(firebaseService);
 	}
 	
 	@GetMapping(path = "getPlaca")
@@ -82,11 +82,10 @@ public class APIController {
 		return firebaseService.getWeatherAccidentDetail(startDate, endDate);
 	}
 	
-	@GetMapping("/getAccidentsByAgeGroup/{type}")///{startDate}/{endDate}") @PathVariable String startDate, @PathVariable String endDate 
-	public APIAge getAccidentsByAgeGroup(@PathVariable String type) throws InterruptedException, ExecutionException {
+	@GetMapping("/getAccidentsByAgeGroup/{type}/{startDate}/{endDate}")  
+	public APIAge getAccidentsByAgeGroup(@PathVariable String type, @PathVariable String startDate, @PathVariable String endDate) throws InterruptedException, ExecutionException {
 
-	
-		return serviceManager.getAccidentsByAgeGroup(firebaseService, type.equals("Todos") ? false : true, "10-10-2020", "10-10-2020");
+		return serviceManager.getAccidentsByAgeGroup(firebaseService, true, startDate, endDate);
 	}
 
 	@GetMapping("/getAccidentsType/{type}/{startDate}/{endDate}")  

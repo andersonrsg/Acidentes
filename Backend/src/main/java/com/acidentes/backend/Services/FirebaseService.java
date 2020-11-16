@@ -154,28 +154,53 @@ public class FirebaseService {
 			
 			Firestore db = FirestoreClient.getFirestore();
 			
-//			if (!fatal) {
-//				return new APIAge();
-//			}
+			List<AccidentAPIOnlyId> ids = new ArrayList<AccidentAPIOnlyId>();
 			
+			System.out.println(startDateWeatherFirebaseString);
+			System.out.println(startDateWeatherFirebaseString);
+			ApiFuture<QuerySnapshot> futureAccidents = db.collection("acidentesFatais")
+					.whereGreaterThan("Timestamp", startDateWeatherFirebaseString)
+					.whereLessThan("Timestamp", endDateWeatherFirebaseString)
+					.get();
 			
-//			String collection = fatal ? "acidentesFataisPessoas" : "acidentesPessoas";
-			String collection = "acidentesFataisPessoas";
-			ApiFuture<QuerySnapshot> future = db.collection(collection).limit(50).get();
+			List<QueryDocumentSnapshot> documentsAccidents = futureAccidents.get().getDocuments();
 			
-			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			for (DocumentSnapshot document: documentsAccidents) {
+				AccidentAPIOnlyId accident = null;
+				
+				
+				if (document.exists()) {
+					
+					accident = document.toObject(AccidentAPIOnlyId.class);
+					ids.add(accident);	
+					
+				} 
+			}
 			
 			APIAge ages = new APIAge();
 			
-			for (DocumentSnapshot document: documents) {
-				APIAgeParser age = null;
+			String collection = "acidentesFataisPessoas";
+			for (AccidentAPIOnlyId acc: ids) {
 				
-				if (document.exists()) {
-					age = document.toObject(APIAgeParser.class);
+				ApiFuture<QuerySnapshot> future = db.collection(collection)
+						.whereEqualTo("idAcidente", acc.idacidente)
+						.limit(10)
+						.get();
+				
+				List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+				
+				for (DocumentSnapshot document: documents) {
+					APIAgeParser age = null;
 					
-					ages.insertValue(age.idade);
-				} 
+					if (document.exists()) {
+						age = document.toObject(APIAgeParser.class);
+						
+						ages.insertValue(age.idade);
+					} 
+				}
 			}
+				
+			
 			return ages;
 		}
 		
@@ -307,6 +332,7 @@ public class FirebaseService {
 			APIAccidentType accidentsType = new APIAccidentType();
 			
 			for (DocumentSnapshot document: documents) {
+				
 				// Gambi
 				APIAccientAllTypeParser type = null;
 				APIFatalAccidentTypeParser typeFatal = null;
