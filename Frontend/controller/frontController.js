@@ -167,6 +167,25 @@ function findAccidentType() {
     });
 }
 
+function getAccidentsLocation() {
+    var selected = document.getElementById("accidentSelect").value
+    var fromDate = document.getElementById("fromDate").value.replaceAll("/", "-");
+    var toDate = document.getElementById("toDate").value.replaceAll("/", "-");
+    $.ajax({
+        type : "GET",
+        url : defaultUrl + "getAccidentsLocation/" + selected + "/" + fromDate + "/" + toDate,
+        success : function (data) {
+            console.log(data)
+            var coords = JSON.parse(JSON.stringify(data))
+            for (i = 0; i < coords.length; i++) {
+                newMapMark(coords[i].latitude, coords[i].longitude, '', 'acidente')
+            }
+        }, error: function () {
+            console.log("x Acid Loc")
+        }
+    });
+}
+
 function mudaop(){
     document.getElementById("testRest").innerHTML = "Paragraph changed!";
 }

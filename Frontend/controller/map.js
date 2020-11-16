@@ -20,6 +20,7 @@ function initMap() {
 
 markersRadares = []
 markersPlacas = []
+markersAcidente = []
 
 function newMapMark(lat,lng,label,icon) {
 
@@ -36,8 +37,10 @@ function newMapMark(lat,lng,label,icon) {
   
   if (icon == "radar") {
     markersRadares.push(myMarker);
-  } else {
+  } else if (icon == "placa" ){
     markersPlacas.push(myMarker);
+  } else {
+    markersAcidente.push(myMarker);
   }
 }
 

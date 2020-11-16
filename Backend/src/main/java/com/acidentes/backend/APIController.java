@@ -94,6 +94,12 @@ public class APIController {
 
 		return firebaseService.getAccidentsType(type.equals("Todos") ? false : true, startDate, endDate);
 	}
+
+	@GetMapping("/getAccidentsLocation/{type}/{startDate}/{endDate}") 
+	public List<AccidentLocation> getAccidentsLocation(@PathVariable String type, @PathVariable String startDate, @PathVariable String endDate) throws InterruptedException, ExecutionException {
+
+		return firebaseService.getAccidentsLocationList(type.equals("Todos") ? false : true, startDate, endDate);
+	}
 }
 
 

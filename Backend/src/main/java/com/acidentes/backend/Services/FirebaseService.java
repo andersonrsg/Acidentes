@@ -325,4 +325,31 @@ public class FirebaseService {
 			System.out.println(accidentsType);
 			return accidentsType;
 		}
+		
+		public List<AccidentLocation> getAccidentsLocationList(boolean fatal, String startDate, String endDate) throws InterruptedException, ExecutionException {
+
+			long startDateFirebaseString = ApiUtils.dateToAPILong(startDate);
+			long endDateFirebaseString = ApiUtils.dateToAPILong(endDate);
+			
+			Firestore db = FirestoreClient.getFirestore();
+			
+			String collection = fatal ? "acidentesFatais" : "acidentesAll";
+		
+			ApiFuture<QuerySnapshot> future = db.collection(collection)
+					.whereGreaterThan("Timestamp", startDateFirebaseString)
+					.whereLessThan("Timestamp", endDateFirebaseString)
+					.get();
+			
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			List<AccidentLocation> locais = new ArrayList<AccidentLocation>();
+			
+			for (DocumentSnapshot document: documents) {
+				
+				if (document.exists()) {
+					if(document.get("latitude") instanceof Double)
+						locais.add(document.toObject(AccidentLocation.class));
+				} 
+			}
+			return locais;	
+		}
 }
