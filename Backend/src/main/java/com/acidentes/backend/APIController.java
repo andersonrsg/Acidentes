@@ -60,7 +60,7 @@ public class APIController {
 	@GetMapping(path = "getRadar")
 	public @ResponseBody List<Radar> getRadar() throws InterruptedException, ExecutionException {
 		
-		return firebaseService.getRadar();
+		return serviceManager.getRadar(firebaseService);
 	}
 	
 	@GetMapping(path = "getPlaca")

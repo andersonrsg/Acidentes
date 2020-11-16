@@ -38,7 +38,10 @@
       window.addEventListener("load", myInit, true); 
       function myInit() {  
         findAges();
-
+        getRadar()
+        initChart();
+        chart.render();
+        
         document.getElementById('accidentSelect').addEventListener('change', function() {
           findAccidentType();
         });
@@ -180,7 +183,7 @@
                           <option>Placas</option>
                         </select>
                         <p class="col-sm-5">
-                          <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()" class="col-sm-1">
+                          <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()" class="col-sm-1" checked>
                           <label for="radarCheckbox" class="col-form-label col-sm-3"> Radares</label>
                           <input type="checkbox" id="placasCheckbox" name="placas" value="Placas" onclick="getPlaca()" class="col-sm-1">
                           <label for="radarCheckbox" class="col-form-label col-sm-3"> Placas</label>

@@ -332,6 +332,7 @@ public class FirebaseService {
 			APIAccidentType accidentsType = new APIAccidentType();
 			
 			for (DocumentSnapshot document: documents) {
+				
 				// Gambi
 				APIAccientAllTypeParser type = null;
 				APIFatalAccidentTypeParser typeFatal = null;
