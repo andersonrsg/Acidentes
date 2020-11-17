@@ -49,11 +49,23 @@ function newMapMark(lat,lng,label,icon) {
   }
 }
 
+var fetchedHeatMap = false;
 function heatMap() {
-  heatmap = new google.maps.visualization.HeatmapLayer({
-    data: getHeatPoints()
-  });
-  heatmap.setMap(map);
+  var selected = document.getElementById("heatMapCheckbox").checked
+  if (fetchedHeatMap) {
+    if (selected) {
+      heatmap.setMap(map);    
+    } else {
+      heatmap.setMap(null);
+    }
+  } else {
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      data: getHeatPoints(),
+      radius: 18
+    });
+    fetchedHeatMap = true;
+    heatmap.setMap(map);
+  }
 }
 
 // Radares

@@ -189,11 +189,13 @@
                           <label for="placasCheckbox"> Placas</label>
                         </span>
                         <span class="col-sm-2">
-                          <input type="checkbox" id="acidentesCheckbox" name="acidentes" value="Acidentes" onclick="getAccidentsLocation(false)">
+                          <input type="checkbox" id="acidentesCheckbox" name="acidentes" value="Acidentes" onclick="getAccidentsLocation(false)" disabled> 
                           <label for="acidentesCheckbox"> Acidentes</label>
                         </span>
                         <span class="col-sm-2">
-                          <button type="button" onclick="heatMap()" class="btn btn-dark">HeatMap</button>
+                          <!--<button type="button" onclick="heatMap()" class="btn btn-dark">HeatMap</button>-->
+                          <input type="checkbox" id="heatMapCheckbox" name="heatMap" value="HeatMap" onclick="heatMap()" > 
+                          <label for="heatMapCheckbox"> HeatMap</label>
                         </span>
                         <!--<button type="button" onclick="findRadarById()" class="btn btn-dark col-sm-3">parse</button>-->
                         

@@ -187,6 +187,7 @@ function getAccidentsLocation(flag) {
             url : defaultUrl + "getAccidentsLocation/" + selected + "/" + fromDate + "/" + toDate,
             success : function (data) {
                 fetchedAcidentes = true;
+                $( "#acidentesCheckbox" ).prop( "disabled", false );
                 console.log(data)
                 var coords = JSON.parse(JSON.stringify(data))
                 for (i = 0; i < coords.length; i++) {
