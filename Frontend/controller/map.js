@@ -37,7 +37,7 @@ function newMapMark(lat,lng,label,icon) {
   
   if (icon == "radar") {
     markersRadares.push(myMarker);
-  } else if (icon == "placa" ){
+  } else if (icon == "preferencia" || icon == "pare" || icon == "escola"){
     markersPlacas.push(myMarker);
   } else {
     markersAcidente.push(myMarker);
