@@ -58,7 +58,7 @@ public class FirebaseService {
 		Firestore db = FirestoreClient.getFirestore();
 		
 //		ApiFuture<QuerySnapshot> future = db.collection("placas").whereEqualTo("descricao", "1ADA OBRIGAT�RIA").get();
-		ApiFuture<QuerySnapshot> future = db.collection("placas").orderBy("itemID").startAt(0).get();
+		ApiFuture<QuerySnapshot> future = db.collection("placas").get();
 		
 		
 		List<QueryDocumentSnapshot> documents = future.get().getDocuments();

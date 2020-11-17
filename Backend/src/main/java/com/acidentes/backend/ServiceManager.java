@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutionException;
 import com.acidentes.backend.Services.FirebaseService;
 
 import models.APIAge;
+import models.Placa;
 import models.Radar;
 import utils.ApiUtils;
 
@@ -45,5 +46,20 @@ public class ServiceManager {
 		}
 	}
 	
+	public Map<String, List<Placa>> placas = new HashMap<>();
+	public List<Placa> getPlaca(FirebaseService firebaseService) throws InterruptedException, ExecutionException {
+		
+		String hashKey = "placas";  
+		
+		List<Placa> object = placas.get(hashKey);
+		if (object == null) {
+			placas.put(hashKey, firebaseService.getPlaca());
+			System.out.println("fetched again");
+			return placas.get(hashKey);
+		} else {
+			System.out.println("returned existing");
+			return object;
+		}
+	}
 
 }
