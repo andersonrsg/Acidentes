@@ -20,7 +20,12 @@ function initMap() {
 
 markersRadares = []
 markersPlacas = []
-markersAcidente = []
+markersAcidentes = []
+
+function limpaMarcasAcidentes() {
+  esconderAcidentes()
+  markersAcidentes = []
+}
 
 function newMapMark(lat,lng,label,icon) {
 
@@ -40,15 +45,27 @@ function newMapMark(lat,lng,label,icon) {
   } else if (icon == "preferencia" || icon == "pare" || icon == "escola"){
     markersPlacas.push(myMarker);
   } else {
-    markersAcidente.push(myMarker);
+    markersAcidentes.push(myMarker);
   }
 }
 
+var fetchedHeatMap = false;
 function heatMap() {
-  heatmap = new google.maps.visualization.HeatmapLayer({
-    data: getHeatPoints()
-  });
-  heatmap.setMap(map);
+  var selected = document.getElementById("heatMapCheckbox").checked
+  if (fetchedHeatMap) {
+    if (selected) {
+      heatmap.setMap(map);    
+    } else {
+      heatmap.setMap(null);
+    }
+  } else {
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      data: getHeatPoints(),
+      radius: 18
+    });
+    fetchedHeatMap = true;
+    heatmap.setMap(map);
+  }
 }
 
 // Radares
@@ -75,6 +92,19 @@ function esconderRadares() {
   function mostrarPlacas() {
     for (let i = 0; i < markersPlacas.length; i++) {
       markersPlacas[i].setMap(map);
+    }
+  }
+  
+  // Acidentes
+  function esconderAcidentes() {
+    for (let i = 0; i < markersAcidentes.length; i++) {
+      markersAcidentes[i].setMap(null);
+    }
+  }
+  
+  function mostrarAcidentes() {
+    for (let i = 0; i < markersAcidentes.length; i++) {
+      markersAcidentes[i].setMap(map);
     }
   }
   
