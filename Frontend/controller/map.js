@@ -20,7 +20,12 @@ function initMap() {
 
 markersRadares = []
 markersPlacas = []
-markersAcidente = []
+markersAcidentes = []
+
+function limpaMarcasAcidentes() {
+  esconderAcidentes()
+  markersAcidentes = []
+}
 
 function newMapMark(lat,lng,label,icon) {
 
@@ -40,7 +45,7 @@ function newMapMark(lat,lng,label,icon) {
   } else if (icon == "placa" ){
     markersPlacas.push(myMarker);
   } else {
-    markersAcidente.push(myMarker);
+    markersAcidentes.push(myMarker);
   }
 }
 
@@ -75,6 +80,19 @@ function esconderRadares() {
   function mostrarPlacas() {
     for (let i = 0; i < markersPlacas.length; i++) {
       markersPlacas[i].setMap(map);
+    }
+  }
+  
+  // Acidentes
+  function esconderAcidentes() {
+    for (let i = 0; i < markersAcidentes.length; i++) {
+      markersAcidentes[i].setMap(null);
+    }
+  }
+  
+  function mostrarAcidentes() {
+    for (let i = 0; i < markersAcidentes.length; i++) {
+      markersAcidentes[i].setMap(map);
     }
   }
   

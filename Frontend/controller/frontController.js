@@ -168,23 +168,37 @@ function findAccidentType() {
     });
 }
 
-function getAccidentsLocation() {
-    var selected = document.getElementById("accidentSelect").value
-    var fromDate = document.getElementById("fromDate").value.replaceAll("/", "-");
-    var toDate = document.getElementById("toDate").value.replaceAll("/", "-");
-    $.ajax({
-        type : "GET",
-        url : defaultUrl + "getAccidentsLocation/" + selected + "/" + fromDate + "/" + toDate,
-        success : function (data) {
-            console.log(data)
-            var coords = JSON.parse(JSON.stringify(data))
-            for (i = 0; i < coords.length; i++) {
-                newMapMark(coords[i].latitude, coords[i].longitude, '', 'acidente')
-            }
-        }, error: function () {
-            console.log("x Acid Loc")
+var fetchedAcidentes = false;
+function getAccidentsLocation(flag) {
+    var selected = document.getElementById("acidentesCheckbox").checked
+    if (!flag && fetchedAcidentes) {
+        if (selected) {
+            mostrarAcidentes()
+        } else {
+            esconderAcidentes()
         }
-    });
+    } else {
+        limpaMarcasAcidentes();
+        var selected = document.getElementById("accidentSelect").value
+        var fromDate = document.getElementById("fromDate").value.replaceAll("/", "-");
+        var toDate = document.getElementById("toDate").value.replaceAll("/", "-");
+        $.ajax({
+            type : "GET",
+            url : defaultUrl + "getAccidentsLocation/" + selected + "/" + fromDate + "/" + toDate,
+            success : function (data) {
+                fetchedAcidentes = true;
+                console.log(data)
+                var coords = JSON.parse(JSON.stringify(data))
+                for (i = 0; i < coords.length; i++) {
+                    newMapMark(coords[i].latitude, coords[i].longitude, '', 'acidente')
+                    document.getElementById("acidentesCheckbox").checked = true;
+
+                }
+            }, error: function () {
+                console.log("x Acid Loc")
+            }
+        });
+    }
 }
 
 function mudaop(){

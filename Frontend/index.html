@@ -111,7 +111,7 @@
               from.datepicker( "option", "maxDate", getDate( this ) );
               findWeatherAccident();
               findAccidentType();
-              getAccidentsLocation();
+              getAccidentsLocation(true);
               findAges();
             });
        
@@ -178,19 +178,25 @@
                         <input class="form-control col-sm-2" type="text" autocomplete="off" id="fromDate" name="fromDate" placeholder="Data Inicial">
                         <label for="to" class="col-sm-1 col-form-label text-sm-right"> Até </label>
                         <input class="form-control col-sm-2" type="text" autocomplete="off" id="toDate" name="toDate" placeholder="Data Final">
-                        <label for="mapType" class="col-form-label col-sm-3">Selecione dados do mapa</label>
-                        <select class="browser-default custom-select col-sm-3" name="mapType" id="mapData">
-                          <option selected="selected">Mapa de acidentes</option>
-                          <option>Placas</option>
-                        </select>
-                        <p class="col-sm-5">
-                          <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()" class="col-sm-1" checked>
-                          <label for="radarCheckbox" class="col-form-label col-sm-3"> Radares</label>
-                          <input type="checkbox" id="placasCheckbox" name="placas" value="Placas" onclick="getPlaca()" class="col-sm-1">
-                          <label for="radarCheckbox" class="col-form-label col-sm-3"> Placas</label>
-                          <button type="button" onclick="heatMap()" class="btn btn-dark col-sm-3">HeatMap</button>
-                          <!--<button type="button" onclick="findRadarById()" class="btn btn-dark col-sm-3">parse</button>-->
-                        </p>
+                        <span class="col-sm-2"></span>
+
+                        <span class="col-sm-2">
+                          <input type="checkbox" id="radarCheckbox" name="radares" value="Radares" onclick="getRadar()" checked>
+                          <label for="radarCheckbox"> Radares</label>
+                        </span>
+                        <span class="col-sm-2">
+                          <input type="checkbox" id="placasCheckbox" name="placas" value="Placas" onclick="getPlaca()">
+                          <label for="radarCheckbox"> Placas</label>
+                        </span>
+                        <span class="col-sm-2">
+                          <input type="checkbox" id="acidentesCheckbox" name="acidentes" value="Acidentes" onclick="getAccidentsLocation(false)">
+                          <label for="radarCheckbox"> Acidentes</label>
+                        </span>
+                        <span class="col-sm-2">
+                          <button type="button" onclick="heatMap()" class="btn btn-dark">HeatMap</button>
+                        </span>
+                        <!--<button type="button" onclick="findRadarById()" class="btn btn-dark col-sm-3">parse</button>-->
+                        
                       </div>
                     </div>
                     <!-- Graficos -->
