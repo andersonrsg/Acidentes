@@ -26,6 +26,7 @@ public class WeatherAccident {
 		
 		int i = 0;
 		LocalDate nextDay = _startDate;
+		nextDay = _startDate.plusDays(-1);
 		while (!nextDay.isEqual(_endDate)) {
 			nextDay = _startDate.plusDays(i); 
 			

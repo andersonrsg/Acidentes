@@ -71,7 +71,7 @@ function newDataPoint(jsonData) {
         showInLegend: true,
         name: "Acidentes",
         markerType: "square",
-        xValueFormatString: "DD MMM, YYYY - HH:mm",
+        xValueFormatString: "DD MMM, YYYY",
         color: "#F08080",
         dataPoints: dataPoints2
       },
