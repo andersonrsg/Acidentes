@@ -110,7 +110,6 @@
               disabled: true
             })
             .on( "change", function() {
-              from.datepicker( "option", "maxDate", getDate( this ) );
               findWeatherAccident();
               findAccidentType();
               getAccidentsLocation(true);
